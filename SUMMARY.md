@@ -62,11 +62,11 @@
 * [6.当前活动](navigation/6.-dang-qian-huo-dong.md)
 * [7.FAQ](navigation/7.faq.md)
 
-## 🧑🤝🧑 关于我们 <a href="#aboutus" id="aboutus"></a>
+## ☎ 关于我们 <a href="#aboutus" id="aboutus"></a>
 
 * [Who are we](aboutus/who-are-we.md)
 
-## 🧑🤝🧑 参考文献 <a href="#reference" id="reference"></a>
+## 📖 参考文献 <a href="#reference" id="reference"></a>
 
 * [Markdown基本语法](reference/markdown-ji-ben-yu-fa.md)
 * [正则表达式语法](reference/zheng-ze-biao-da-shi-yu-fa.md)
