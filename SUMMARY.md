@@ -68,5 +68,6 @@
 
 ## 📖 参考文献 <a href="#reference" id="reference"></a>
 
+* [VsCode安装、插件安装、Markdown预览](reference/vscode-an-zhuang-cha-jian-an-zhuang-markdown-yu-lan.md)
 * [Markdown基本语法](reference/markdown-ji-ben-yu-fa.md)
 * [正则表达式语法](reference/zheng-ze-biao-da-shi-yu-fa.md)
