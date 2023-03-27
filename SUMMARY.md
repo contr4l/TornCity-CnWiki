@@ -8,7 +8,7 @@
     * [子页面创建计划](huan-ying-ye/shi-gong-ji-hua/zi-ye-mian-chuang-jian-ji-hua.md)
     * [子页面翻译计划](huan-ying-ye/shi-gong-ji-hua/zi-ye-mian-fan-yi-ji-hua.md)
     * [图片资源爬虫及插入计划](huan-ying-ye/shi-gong-ji-hua/tu-pian-zi-yuan-pa-chong-ji-cha-ru-ji-hua.md)
-  * [施工规范](huan-ying-ye/shi-gong-gui-fan/README.md)
+  * [施工规范](huan-ying-ye/shi-gong-gui-fan.md)
     * [悬赏材料提交规范](huan-ying-ye/shi-gong-gui-fan/xuan-shang-cai-liao-ti-jiao-gui-fan.md)
     * [悬赏材料格式规范](huan-ying-ye/shi-gong-gui-fan/xuan-shang-cai-liao-ge-shi-gui-fan.md)
   * [任务领取](huan-ying-ye/ren-wu-ling-qu.md)
@@ -62,7 +62,7 @@
 * [6.当前活动](navigation/6.-dang-qian-huo-dong.md)
 * [7.FAQ](navigation/7.faq.md)
 
-## ☎ 关于我们 <a href="#aboutus" id="aboutus"></a>
+## 🧑🤝🧑 关于我们 <a href="#aboutus" id="aboutus"></a>
 
 * [Who are we](aboutus/who-are-we.md)
 
