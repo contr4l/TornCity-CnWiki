@@ -6,18 +6,18 @@ Test doing some edit.
 
 ## Wiki施工计划
 
-* [ ] [fen-gong-ji-shi-jian-xian.md](huan-ying-ye/shi-gong-ji-hua/fen-gong-ji-shi-jian-xian.md "mention")
-* [ ] [zhu-ye-mian-chuang-jian-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zhu-ye-mian-chuang-jian-ji-hua.md "mention")
-* [ ] [zhu-ye-mian-fan-yi-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zhu-ye-mian-fan-yi-ji-hua.md "mention")
-* [ ] [zi-ye-mian-chuang-jian-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zi-ye-mian-chuang-jian-ji-hua.md "mention")
-* [ ] [zi-ye-mian-fan-yi-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zi-ye-mian-fan-yi-ji-hua.md "mention")
-* [ ] [tu-pian-zi-yuan-pa-chong-ji-cha-ru-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/tu-pian-zi-yuan-pa-chong-ji-cha-ru-ji-hua.md "mention")
+* [ ] [fen-gong-ji-shi-jian-xian.md](huan-ying-ye/shi-gong-ji-hua/fen-gong-ji-shi-jian-xian.md)
+* [ ] [zhu-ye-mian-chuang-jian-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zhu-ye-mian-chuang-jian-ji-hua.md)
+* [ ] [zhu-ye-mian-fan-yi-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zhu-ye-mian-fan-yi-ji-hua.md)
+* [ ] [zi-ye-mian-chuang-jian-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zi-ye-mian-chuang-jian-ji-hua.md)
+* [ ] [zi-ye-mian-fan-yi-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zi-ye-mian-fan-yi-ji-hua.md)
+* [ ] [tu-pian-zi-yuan-pa-chong-ji-cha-ru-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/tu-pian-zi-yuan-pa-chong-ji-cha-ru-ji-hua.md)
 
 ## 英文Wiki站
-
+<!-- 
 {% embed url="https://wiki.torn.com/wiki" %}
 英文Wiki网址
-{% endembed %}
+{% endembed %} -->
 
 <details>
 
@@ -36,7 +36,7 @@ Test doing some edit.
 3. 等待修改合入主分支
 
 </details>
-
+<!-- 
 {% hint style="success" %}
 官方QQ群：138838543
 {% endhint %}
@@ -44,4 +44,4 @@ Test doing some edit.
 {% hint style="info" %}
 贡献者
 {% endhint %}
-
+ -->
