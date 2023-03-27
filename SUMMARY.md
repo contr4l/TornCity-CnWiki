@@ -62,7 +62,7 @@
 * [6.当前活动](navigation/6.-dang-qian-huo-dong.md)
 * [7.FAQ](navigation/7.faq.md)
 
-## 🧑🤝🧑 关于我们 <a href="#aboutus" id="aboutus"></a>
+## 🧑🤝🧑 🧑🤝🧑 关于我们 <a href="#aboutus" id="aboutus"></a>
 
 * [Who are we](aboutus/who-are-we.md)
 
