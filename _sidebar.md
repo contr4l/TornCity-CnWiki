@@ -1,5 +1,3 @@
-# Table of contents
-
 * [🌆 欢迎页](README.md)
   * [施工计划](huan-ying-ye/shi-gong-ji-hua/README.md)
     * [分工及时间线](huan-ying-ye/shi-gong-ji-hua/fen-gong-ji-shi-jian-xian.md)
@@ -62,7 +60,7 @@
 * [6.当前活动](navigation/6.-dang-qian-huo-dong.md)
 * [7.FAQ](navigation/7.faq.md)
 
-## 🧑🤝🧑 🧑🤝🧑 关于我们 <a href="#aboutus" id="aboutus"></a>
+## 🧑 关于我们 <a href="#aboutus" id="aboutus"></a>
 
 * [Who are we](aboutus/who-are-we.md)
 

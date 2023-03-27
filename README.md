@@ -36,7 +36,7 @@ Test doing some edit.
 3. 等待修改合入主分支
 
 </details>
-<!-- 
+
 {% hint style="success" %}
 官方QQ群：138838543
 {% endhint %}
@@ -44,4 +44,4 @@ Test doing some edit.
 {% hint style="info" %}
 贡献者
 {% endhint %}
- -->
+
