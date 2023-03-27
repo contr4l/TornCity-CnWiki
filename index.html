@@ -18,20 +18,36 @@
   <script>
     window.$docsify = {
       loadSidebar: true,
-      loadNavbar: true
+      loadNavbar: true,
+      name: "Torn's City CN Wiki",
+      nameLink: '/README.md',
+      search: {
+          paths: 'auto',
+          placeholder: '请输入要搜索的关键字',
+          noData: '没有结果',
+          depth: 6,
+      },
+      disqus: 'torn-cnwiki',
+      routerMode: 'history',
+      
     }
   </script>
+  <script src="/js/disqus.min.js"></script>
+
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
-  <script src="js/docsify-copy-code.min.js"></script>
+  <script src="/js/docsify-copy-code.min.js"></script>
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
-  
-  <script>
-    window.$docsify = {
-      disqus: 'torn-cnwiki'
-    }
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+  <script type="text/javascript">
+    window.onresize = function() { 
+      var dq_size = document.getElementById("disqus_thread");
+      dq_size.style.width = (window.innerWidth * 0.5) + "px";
+    };
   </script>
-  <script src="js/disqus.min.js"></script>
+  
+  
 </body>
 </html>
