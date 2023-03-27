@@ -13,7 +13,7 @@ Test doing some edit.
 * [ ] [zi-ye-mian-fan-yi-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/zi-ye-mian-fan-yi-ji-hua.md "mention")
 * [ ] [tu-pian-zi-yuan-pa-chong-ji-cha-ru-ji-hua.md](huan-ying-ye/shi-gong-ji-hua/tu-pian-zi-yuan-pa-chong-ji-cha-ru-ji-hua.md "mention")
 
-## 参考资料
+## 英文Wiki站
 
 {% embed url="https://wiki.torn.com/wiki" %}
 英文Wiki网址
