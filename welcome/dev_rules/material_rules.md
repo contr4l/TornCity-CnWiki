@@ -3,7 +3,7 @@
 ### 格式要求
 
 1. 必须按照Markdown语法提交
-2. 提交文件必须以`.md`作为后缀名，语法规则请参考参考文献中的[**Markdown基本语法**](../../reference/markdown-ji-ben-yu-fa.md)****
+2. 提交文件必须以`.md`作为后缀名，语法规则请参考参考文献中的[**Markdown基本语法**](/reference/markdown_basic.md)
    1. 必须要遵守的语法格式包括：N级标题、加粗、下划线
    2. 如果内部有超链接内容，请在开头注明TODO项，将由前端统一处理
 
@@ -39,3 +39,5 @@
    2. ctrl+shift+p选择Preview in the side实时预览
 2. 使用Marktext，下载地址：[https://github.com/marktext/marktext/releases](https://github.com/marktext/marktext/releases)
    1. 所见即所得，开箱即用，ctrl+E切换源码模式和预览模式
+
+3. 详细教程参考[VsCode安装教程](/reference/vscode_install.md)

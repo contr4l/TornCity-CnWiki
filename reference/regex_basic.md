@@ -1,6 +1,4 @@
----
-description: 来源：https://learn.microsoft.com/zh-cn/deployedge/edge-learnmore-regex
----
+>  来源：https://learn.microsoft.com/zh-cn/deployedge/edge-learnmore-regex
 
 # 正则表达式语法
 
