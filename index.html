@@ -7,7 +7,7 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="https://unpkg.com/docsify-toc@1.0.0/dist/toc.css">
+  <link rel="stylesheet" href="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/light.css">
 
   <link 
       rel="stylesheet"
@@ -42,10 +42,11 @@
         tabHeadings: true       // default
       },
       relativePath: true,
+
       toc: {
-        scope: '.markdown-section',
-        headings: 'h1, h2, h3',
-        title: "Torn's City CN Wiki",
+        tocMaxLevel: 5,
+        target: 'h2, h3, h4, h5, h6',
+        ignoreHeaders:  ['<!-- {docsify-ignore} -->', '<!-- {docsify-ignore-all} -->']
       },
     }
   </script>
@@ -58,7 +59,7 @@
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
-  <script src="https://unpkg.com/docsify-toc@1.0.0/dist/toc.js"></script>
+  <script src="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
 
   <script 
     src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"
