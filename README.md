@@ -5,13 +5,13 @@
 Test doing some edit.
 
 ## 施工计划
-* [Wiki施工计划](/welcome/dev_plans/README.md)
-* [分工及时间线](welcome/dev_plans/fen-gong-ji-shi-jian-xian.md)
+* [施工计划](/welcome/dev_plans/README.md)
+* [分工及时间线](welcome/dev_plans/job_assign.md)
 
 ## 英文Wiki站
 
-```link-preview
-https://github.com/docsifyjs/docsify/
+```html
+https://wiki.torn.com/wiki
 ```
 
 <details>
@@ -32,8 +32,8 @@ https://github.com/docsifyjs/docsify/
 
 </details>
 
-!> 官方QQ群：138838543
+?> 官方QQ群：138838543
 
-!> 贡献者
+?> 贡献者
 contr4l, optional_1, optional_2
 

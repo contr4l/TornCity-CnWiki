@@ -1,0 +1,20 @@
+/* body {
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    margin: 0 auto;
+    max-width: 60rem;
+    padding: 0 .5rem;
+} */
+
+details {
+    background: #eee;
+    margin-bottom: 2rem;
+    padding: .5rem 1rem;
+}
+
+summary {
+cursor: pointer;
+}
+
+summary > * {
+display: inline;
+}
