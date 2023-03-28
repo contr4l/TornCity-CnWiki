@@ -32,11 +32,8 @@ https://github.com/docsifyjs/docsify/
 
 </details>
 
-{% hint style="success" %}
-官方QQ群：138838543
-{% endhint %}
+!> 官方QQ群：138838543
 
-{% hint style="info" %}
-贡献者
-{% endhint %}
+!> 贡献者
+contr4l, optional_1, optional_2
 
