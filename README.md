@@ -32,8 +32,10 @@ https://wiki.torn.com/wiki
 
 </details>
 
-?> 官方QQ群：138838543
+## 官方QQ群 `138838543`
 
-?> 贡献者
-contr4l, optional_1, optional_2
+## 贡献者
+<a href="https://github.com/contr4l/contr4l.github.io/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=contr4l/contr4l.github.io" />
+</a>
 
