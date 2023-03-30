@@ -1,7 +1,5 @@
 > 作者：contr4l_
 
-@[toc]
-
 # Git及Github基本功能介绍  
 Git以及github是目前可以说是流行最广的代码管理方案（类似的方案有时代的眼泪之SVN、同样基于git的gitlab、gitee等等），在本教程中，将手把手教读者完成git的安装、github仓库的拉取、代码的修改及提交等事务，为拥抱开源打下基础。
 

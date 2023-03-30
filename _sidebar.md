@@ -60,6 +60,7 @@
   * [Markdown基本语法](/reference/markdown_basic.md)
   * [正则表达式语法](/reference/regex_basic.md)
   * [Git及Github基本功能介绍](/reference/git_basic.md)
+  * [Docsify基本功能介绍](/reference/docsify_basic.md)
 
 * 🧠 内部攻略 <a href="#tutorials" id="tutorials"></a>
   * [系统工作](/tutorials/xi-tong-gong-zuo.md)

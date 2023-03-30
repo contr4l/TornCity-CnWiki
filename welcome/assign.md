@@ -2,13 +2,40 @@
 
 > 提交方式见 [悬赏任务提交规范](dev_rules/commit_rules.md)
 
+### 奖励规格
+- 对于原创文章征稿，统一为**10xan**/篇
+- 对于翻译文章悬赏，统一为**1xan**/千字
+- 对于已有文章搬运，统一为**2xan**/篇
+    - 注：格式要求与上述文章一致
+
+?> 所有为wiki做出贡献的人员，名字都会永远记录在wiki的感谢名录中
+
+!> contr4l: 我知道这些都是白菜价甚至是黑心员工价，but you all know cn torn wiki needs you guys.
+
 ### 已完成任务
 
-|  序号 |  页面 | 领取人 | 完成时间 |
-| :-: | :-: | :-: | :--: |
-|     |     |     |      |
-|     |     |     |      |
-|     |     |     |      |
+<table>
+<thead>
+<tr>
+    <th align="center">序号</th>
+    <th align="center">页面</th>
+    <th align="center">领取人</th>
+    <th align="center">完成时间</th>
+    <th data-type="checkbox">悬赏发放</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+    <td align="center">1</td>
+    <td align="center">New Player Missions</td>
+    <td align="center">contr4l_[2893026]</td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+</tbody>
+
+</table>
 
 ### 当前活跃任务
 
