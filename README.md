@@ -35,7 +35,6 @@ https://wiki.torn.com/wiki
 ## 官方QQ群 `138838543`
 
 ## 贡献者
-<a href="https://github.com/contr4l/contr4l.github.io/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=contr4l/contr4l.github.io" />
-</a>
+<!-- readme: collaborators,contributors -start -->
+<!-- readme: collaborators,contributors -end -->
 
