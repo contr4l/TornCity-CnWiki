@@ -13,4 +13,4 @@ jobs:
       - name: Contribute List
         uses: akhilmhdh/contributors-readme-action@v2.3.6
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: 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
