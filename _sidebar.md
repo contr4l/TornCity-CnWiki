@@ -1,6 +1,6 @@
 * [🌆 欢迎页](/README.md)
   * [施工计划](/welcome/dev_plans/README.md)
-    * [分工及时间线](/welcome/dev_plans/job_assign.md)
+    * [版本计划](/welcome/dev_plans/version_plans.md)
   * [施工规范](/welcome/dev_rules/README.md)
     * [悬赏材料提交规范](/welcome/dev_rules/commit_rules.md)
     * [悬赏材料格式规范](/welcome/dev_rules/material_rules.md)
