@@ -14,7 +14,7 @@
   * [4.奖励](/quicklink/4.-jiang-li.md)
   * [5.战斗数值](/quicklink/5.-zhan-dou-shu-zhi.md)
   * [6.公司](/quicklink/6.-gong-si.md)
-  * [7.捐赠者](/quicklink/7.-juan-zeng-zhe.md)
+  * [7.捐赠者](/quicklink/7.-juan-zeng-zhe/README.md)
   * [8.嗑药](/quicklink/8.-ke-yao.md)
   * [9.物品](/quicklink/9.-wu-pin.md)
   * [10.旅行](/quicklink/10.-lv-hang.md)
