@@ -24,7 +24,7 @@
   * [14.胆量](/quicklink/14.-dan-liang.md)
   * [15.赛车](/quicklink/15.-sai-che.md)
   * [16.反馈](/quicklink/16.-fan-kui.md)
-  * [17.股市](/quicklink/17.-gu-shi.md)
+  * [17.股市](/quicklink/17.-gu-shi/README.md)
   * [18.领土](/quicklink/18.-ling-tu.md)
 
 * 🚙 功能区 <a href="#area" id="area"></a>
