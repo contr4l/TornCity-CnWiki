@@ -2,7 +2,7 @@
 
 ## 简介
 
-Test doing some edit.
+这是一个关于Torn City Wiki的汉化工程。
 
 ## 施工计划
 * [施工计划](/welcome/dev_plans/README.md)
@@ -13,26 +13,13 @@ Test doing some edit.
 ```html
 https://wiki.torn.com/wiki
 ```
+- 页面布局及内容均来自官方Wiki
 
-<details>
+## SMTH-QQ群
+- `138838543` (注册Torn City前请务必入群避免不必要的损失)
 
-<summary>声明</summary>
-
-页面布局及内容均来自官方Wiki
-
-</details>
-
-<details>
-
-<summary>参与编辑</summary>
-
-1. 申请editor权限
-2. 编辑并提交Edit Merge Request
-3. 等待修改合入主分支
-
-</details>
-
-## 官方QQ群 `138838543`
+## 如何参与编辑
+- 请参考页面内的 [悬赏材料提交规范](welcome/dev_rules/commit_rules.md)
 
 ## 贡献者
 <!-- readme: collaborators,contributors -start -->

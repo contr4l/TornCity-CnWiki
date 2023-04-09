@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://wiki.smth.vip/#/welcome/assign -->
+<html lang="en" class="" style="--docsify_dark_mode_bg:white; --docsify_dark_mode_btn:var(--theme-color); --text_color:var(--theme-color);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link id="giscus-css" rel="stylesheet" href="./test_files/default.css"><style type="text/css">:root{--docsifytabs-border-color:#ededed;--docsifytabs-border-px:1px;--docsifytabs-border-radius-px: ;--docsifytabs-margin:1.5em 0;--docsifytabs-tab-background:#f8f8f8;--docsifytabs-tab-background--active:var(--docsifytabs-content-background);--docsifytabs-tab-color:#999;--docsifytabs-tab-color--active:inherit;--docsifytabs-tab-highlight-px:3px;--docsifytabs-tab-highlight-color:var(--theme-color,currentColor);--docsifytabs-tab-padding:0.6em 1em;--docsifytabs-content-background:inherit;--docsifytabs-content-padding:1.5rem}.docsify-tabs:before,.docsify-tabs__tab{z-index:1}.docsify-tabs__tab--active,.docsify-tabs__tab:focus{z-index:2}.docsify-tabs{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;position:relative}.docsify-tabs:before{-ms-flex-order:0;content:"";-ms-flex:1 1;flex:1 1;order:0}.docsify-tabs__tab{-ms-flex-order:-1;appearance:none;font-size:inherit;margin:0;order:-1;position:relative}.docsify-tabs__content[class]{height:0;overflow:hidden;position:absolute;visibility:hidden;width:100%}.docsify-tabs__content[class]>:first-child{margin-top:0}.docsify-tabs__content[class]>:last-child{margin-bottom:0}.docsify-tabs__tab--active+.docsify-tabs__content[class]{height:auto;overflow:auto;position:relative;visibility:visible}[class*=docsify-tabs--]{margin:1.5em 0;margin:var(--docsifytabs-margin)}[class*=docsify-tabs--]>.docsify-tabs__tab{background:#f8f8f8;background:var(--docsifytabs-tab-background);color:#999;color:var(--docsifytabs-tab-color);padding:.6em 1em;padding:var(--docsifytabs-tab-padding)}[class*=docsify-tabs--]>.docsify-tabs__tab--active{background:inherit;background:var(--docsifytabs-tab-background--active);color:inherit;color:var(--docsifytabs-tab-color--active)}[class*=docsify-tabs--]>.docsify-tabs__content{background:inherit;background:var(--docsifytabs-content-background)}[class*=docsify-tabs--]>.docsify-tabs__tab--active+.docsify-tabs__content{padding:1.5rem;padding:var(--docsifytabs-content-padding)}.docsify-tabs--classic:before,.docsify-tabs--classic>.docsify-tabs__content,.docsify-tabs--classic>.docsify-tabs__tab{border-color:#ededed;border-color:var(--docsifytabs-border-color);border-style:solid;border-width:1px;border-width:var(--docsifytabs-border-px)}.docsify-tabs--classic:before{border-left-width:0;border-right-width:0;border-top-width:0;margin-right:1px;margin-right:var(--docsifytabs-border-px)}.docsify-tabs--classic>.docsify-tabs__tab:first-of-type{border-top-left-radius:var(--docsifytabs-border-radius-px)}.docsify-tabs--classic>.docsify-tabs__tab:last-of-type{border-top-right-radius:var(--docsifytabs-border-radius-px)}.docsify-tabs--classic>.docsify-tabs__tab~.docsify-tabs__tab{margin-left:-1px;margin-left:calc(0px - var(--docsifytabs-border-px))}.docsify-tabs--classic>.docsify-tabs__tab--active{border-bottom-width:0;box-shadow:inset 0 3px 0 0 currentColor;box-shadow:inset 0 var(--docsifytabs-tab-highlight-px) 0 0 var(--docsifytabs-tab-highlight-color)}.docsify-tabs--classic>.docsify-tabs__content{border-radius:0;border-radius:0 var(--docsifytabs-border-radius-px) var(--docsifytabs-border-radius-px) var(--docsifytabs-border-radius-px);border-top:0;margin-top:-1px;margin-top:calc(0px - var(--docsifytabs-border-px))}.docsify-tabs--material>.docsify-tabs__tab{background:transparent;border:0;margin-bottom:2px;margin-bottom:calc(var(--docsifytabs-tab-highlight-px) - var(--docsifytabs-border-px))}.docsify-tabs--material>.docsify-tabs__tab--active{background:transparent;box-shadow:0 3px 0 0 currentColor;box-shadow:0 var(--docsifytabs-tab-highlight-px) 0 0 var(--docsifytabs-tab-highlight-color)}.docsify-tabs--material>.docsify-tabs__content{border-color:#ededed;border-color:var(--docsifytabs-border-color);border-style:solid;border-width:1px 0;border-width:var(--docsifytabs-border-px) 0}</style>
+  
+  <title>任务领取</title>
+  <link rel="shortcut icon" href="https://wiki.smth.vip/.gitbook/assets/icons/favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="./test_files/vue.css">
+  <link rel="stylesheet" href="./test_files/light.css">
+  <link rel="stylesheet" href="./test_files/details.css">
+  <link rel="stylesheet" href="./test_files/giscus.css">
+  <link rel="stylesheet" href="./test_files/style.min.css">
+
+<style type="text/css">.docsify-copy-code-button,.docsify-copy-code-button span{cursor:pointer;transition:all .25s ease}.docsify-copy-code-button{position:absolute;z-index:1;top:0;right:0;overflow:visible;padding:.65em .8em;border:0;border-radius:0;outline:0;font-size:1em;background:grey;background:var(--theme-color,grey);color:#fff;opacity:0}.docsify-copy-code-button span{border-radius:3px;background:inherit;pointer-events:none}.docsify-copy-code-button .error,.docsify-copy-code-button .success{position:absolute;z-index:-100;top:50%;right:0;padding:.5em .65em;font-size:.825em;opacity:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.docsify-copy-code-button.error .error,.docsify-copy-code-button.success .success{right:100%;opacity:1;-webkit-transform:translate(-115%,-50%);transform:translate(-115%,-50%)}.docsify-copy-code-button:focus,pre:hover .docsify-copy-code-button{opacity:1}</style><style type="text/css">.medium-zoom-overlay{position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}.medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}.medium-zoom-image{cursor:pointer;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,0,.2,1)!important}.medium-zoom-image--hidden{visibility:hidden}.medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}</style><style>:root{--theme-color: #42b983;}</style><style>
+.sidebar {
+  padding-top: 0;
+}
+
+.search {
+  margin-bottom: 20px;
+  padding: 6px;
+  border-bottom: 1px solid #eee;
+}
+
+.search .input-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.search .results-panel {
+  display: none;
+}
+
+.search .results-panel.show {
+  display: block;
+}
+
+.search input {
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 0.6em 7px;
+  font-size: inherit;
+  border: 1px solid transparent;
+}
+
+.search input:focus {
+  box-shadow: 0 0 5px var(--theme-color, #42b983);
+  border: 1px solid var(--theme-color, #42b983);
+}
+
+.search input::-webkit-search-decoration,
+.search input::-webkit-search-cancel-button,
+.search input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.search input::-ms-clear {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.search .clear-button {
+  cursor: pointer;
+  width: 36px;
+  text-align: right;
+  display: none;
+}
+
+.search .clear-button.show {
+  display: block;
+}
+
+.search .clear-button svg {
+  transform: scale(.5);
+}
+
+.search h2 {
+  font-size: 17px;
+  margin: 10px 0;
+}
+
+.search a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.search .matching-post {
+  border-bottom: 1px solid #eee;
+}
+
+.search .matching-post:last-child {
+  border-bottom: 0;
+}
+
+.search p {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.search p.empty {
+  text-align: center;
+}
+
+.app-name.hide, .sidebar-nav.hide {
+  display: none;
+}</style></head>
+
+<body data-page="welcome/assign.md" class="ready sticky">
+  <nav class="app-nav"><!-- _navbar.md -->
+
+<ul><li><p>入门</p><ul><li><a href="https://wiki.smth.vip/#/quicklink/1.-xin-shou-ren-wu" title="新手任务">新手任务</a></li></ul></li><li><p>城区一览</p><ul><li><a href="https://wiki.smth.vip/#/area/1.-cheng-shi" title="城区">城区</a></li></ul></li></ul></nav><a href="https://github.com/contr4l/contr4l.github.io" target="_blank" class="github-corner" aria-label="View source on Github"><svg viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><main><button class="sidebar-toggle" aria-label="Menu"><div class="sidebar-toggle-button"><span></span><span></span><span></span></div></button><aside class="sidebar"><div class="search"><div class="input-wrap">
+      <input type="search" value="" aria-label="Search text" placeholder="请输入要搜索的关键字">
+      <div class="clear-button">
+        <svg width="26" height="24">
+          <circle cx="12" cy="12" r="11" fill="#ccc"></circle>
+          <path stroke="white" stroke-width="2" d="M8.25,8.25,15.75,15.75"></path>
+          <path stroke="white" stroke-width="2" d="M8.25,15.75,15.75,8.25"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="results-panel"></div>
+    </div><h1 class="app-name"><a class="app-name-link" data-nosearch="" href="https://wiki.smth.vip/#/README.md">Torn's City CN Wiki</a></h1><div class="sidebar-nav"><ul><li><p><a href="https://wiki.smth.vip/#/README" title="🌆 欢迎页">🌆 欢迎页</a></p><ul><li><a href="https://wiki.smth.vip/#/welcome/dev_plans/README" title="施工计划">施工计划</a><ul><li><a href="https://wiki.smth.vip/#/welcome/dev_plans/version_plans" title="版本计划">版本计划</a></li></ul></li><li><a href="https://wiki.smth.vip/#/welcome/dev_rules/README" title="施工规范">施工规范</a><ul><li><a href="https://wiki.smth.vip/#/welcome/dev_rules/commit_rules" title="悬赏材料提交规范">悬赏材料提交规范</a></li><li><a href="https://wiki.smth.vip/#/welcome/dev_rules/material_rules" title="悬赏材料格式规范">悬赏材料格式规范</a></li></ul></li><li class="active"><a href="https://wiki.smth.vip/#/welcome/assign" title="任务领取">任务领取</a></li></ul></li><li><p>🔗 快速链接 <a href="https://wiki.smth.vip/#quicklink" id="quicklink" title=""></a></p><ul><li><a href="https://wiki.smth.vip/#/quicklink/1.-xin-shou-ren-wu" title="1.新手任务">1.新手任务</a></li><li><a href="https://wiki.smth.vip/#/quicklink/2.api" title="2.API">2.API</a></li><li><a href="https://wiki.smth.vip/#/quicklink/3.-gong-ji/README" title="3.攻击">3.攻击</a><ul><li><a href="https://wiki.smth.vip/#/quicklink/3.-gong-ji/wu-qi" title="武器">武器</a></li></ul></li><li><a href="https://wiki.smth.vip/#/quicklink/4.-jiang-li" title="4.奖励">4.奖励</a></li><li><a href="https://wiki.smth.vip/#/quicklink/5.-zhan-dou-shu-zhi" title="5.战斗数值">5.战斗数值</a></li><li><a href="https://wiki.smth.vip/#/quicklink/6.-gong-si" title="6.公司">6.公司</a></li><li><a href="https://wiki.smth.vip/#/quicklink/7.-juan-zeng-zhe" title="7.捐赠者">7.捐赠者</a></li><li><a href="https://wiki.smth.vip/#/quicklink/8.-ke-yao" title="8.嗑药">8.嗑药</a></li><li><a href="https://wiki.smth.vip/#/quicklink/9.-wu-pin" title="9.物品">9.物品</a></li><li><a href="https://wiki.smth.vip/#/quicklink/10.-lv-hang" title="10.旅行">10.旅行</a></li><li><a href="https://wiki.smth.vip/#/quicklink/11.-shou-lie" title="11.狩猎">11.狩猎</a></li><li><a href="https://wiki.smth.vip/#/quicklink/12.-hun-yin" title="12.婚姻">12.婚姻</a></li><li><a href="https://wiki.smth.vip/#/quicklink/13.-gong-xun" title="13.功勋">13.功勋</a></li><li><a href="https://wiki.smth.vip/#/quicklink/14.-dan-liang" title="14.胆量">14.胆量</a></li><li><a href="https://wiki.smth.vip/#/quicklink/15.-sai-che" title="15.赛车">15.赛车</a></li><li><a href="https://wiki.smth.vip/#/quicklink/16.-fan-kui" title="16.反馈">16.反馈</a></li><li><a href="https://wiki.smth.vip/#/quicklink/17.-gu-shi" title="17.股市">17.股市</a></li><li><a href="https://wiki.smth.vip/#/quicklink/18.-ling-tu" title="18.领土">18.领土</a></li></ul></li><li><p>🚙 功能区 <a href="https://wiki.smth.vip/#area" id="area" title=""></a></p><ul><li><a href="https://wiki.smth.vip/#/area/1.-cheng-shi" title="1.城市">1.城市</a></li><li><a href="https://wiki.smth.vip/#/area/2.-gong-zuo" title="2.工作">2.工作</a></li><li><a href="https://wiki.smth.vip/#/area/3.-jian-shen-fang" title="3.健身房">3.健身房</a></li><li><a href="https://wiki.smth.vip/#/area/4.-si-ren-zi-chan" title="4.私人资产">4.私人资产</a></li><li><a href="https://wiki.smth.vip/#/area/5.-jiao-yu" title="5.教育">5.教育</a></li><li><a href="https://wiki.smth.vip/#/area/6.-gao-shi" title="6.搞事">6.搞事</a></li><li><a href="https://wiki.smth.vip/#/area/7.-ren-wu" title="7.任务">7.任务</a></li><li><a href="https://wiki.smth.vip/#/area/8.-bao-zhi" title="8.报纸">8.报纸</a></li><li><a href="https://wiki.smth.vip/#/area/9.-jian-yu" title="9.监狱">9.监狱</a></li><li><a href="https://wiki.smth.vip/#/area/10.-yi-yuan" title="10.医院">10.医院</a></li><li><a href="https://wiki.smth.vip/#/area/11.-du-chang" title="11.赌场">11.赌场</a></li><li><a href="https://wiki.smth.vip/#/area/12.-lun-tan" title="12.论坛">12.论坛</a></li><li><a href="https://wiki.smth.vip/#/area/13.-ming-ren-tang" title="13.名人堂">13.名人堂</a></li><li><a href="https://wiki.smth.vip/#/area/14.-bang-pai" title="14.帮派">14.帮派</a></li></ul></li><li><p>🔎 导航 <a href="https://wiki.smth.vip/#navigation" id="navigation" title=""></a></p><ul><li><a href="https://wiki.smth.vip/#/navigation/1.-zhu-ye" title="1.主页">1.主页</a></li><li><a href="https://wiki.smth.vip/#/navigation/2.-gong-xian-zhe" title="2.贡献者">2.贡献者</a></li><li><a href="https://wiki.smth.vip/#/navigation/3.-she-qu-men-hu" title="3.社区门户">3.社区门户</a></li><li><a href="https://wiki.smth.vip/#/navigation/4.-shi-yong-xie-yi" title="4.使用协议">4.使用协议</a></li><li><a href="https://wiki.smth.vip/#/navigation/5.-jin-ling" title="5.禁令">5.禁令</a></li><li><a href="https://wiki.smth.vip/#/navigation/6.-dang-qian-huo-dong" title="6.当前活动">6.当前活动</a></li><li><a href="https://wiki.smth.vip/#/navigation/7.faq" title="7.FAQ">7.FAQ</a></li></ul></li><li><p>🧑 关于我们 <a href="https://wiki.smth.vip/#aboutus" id="aboutus" title=""></a></p><ul><li><a href="https://wiki.smth.vip/#/aboutus/who-are-we" title="Who are we">Who are we</a></li></ul></li><li><p>📖 参考文献 <a href="https://wiki.smth.vip/#reference" id="reference" title=""></a></p><ul><li><a href="https://wiki.smth.vip/#/reference/vscode_install" title="VsCode安装、插件安装、Markdown预览">VsCode安装、插件安装、Markdown预览</a></li><li><a href="https://wiki.smth.vip/#/reference/markdown_basic" title="Markdown基本语法">Markdown基本语法</a></li><li><a href="https://wiki.smth.vip/#/reference/regex_basic" title="正则表达式语法">正则表达式语法</a></li><li><a href="https://wiki.smth.vip/#/reference/git_basic" title="Git及Github基本功能介绍">Git及Github基本功能介绍</a></li><li><a href="https://wiki.smth.vip/#/reference/docsify_basic" title="Docsify基本功能介绍">Docsify基本功能介绍</a></li></ul></li><li><p>🧠 内部攻略 <a href="https://wiki.smth.vip/#tutorials" id="tutorials" title=""></a></p><ul><li><a href="https://wiki.smth.vip/#/tutorials/xi-tong-gong-zuo" title="系统工作">系统工作</a></li></ul></li></ul></div></aside><section class="content"><aside class="toc-nav"><div class="page_toc"><div class="lv3"><a href="https://wiki.smth.vip/#/welcome/assign?id=%e5%a5%96%e5%8a%b1%e8%a7%84%e6%a0%bc" data-id="奖励规格" class="anchor"><span>奖励规格</span></a></div><div class="lv3 active"><a href="https://wiki.smth.vip/#/welcome/assign?id=%e5%b7%b2%e5%ae%8c%e6%88%90%e4%bb%bb%e5%8a%a1" data-id="已完成任务" class="anchor"><span>已完成任务</span></a></div><div class="lv3"><a href="https://wiki.smth.vip/#/welcome/assign?id=%e5%bd%93%e5%89%8d%e6%b4%bb%e8%b7%83%e4%bb%bb%e5%8a%a1" data-id="当前活跃任务" class="anchor"><span>当前活跃任务</span></a></div></div></aside><article class="markdown-section" id="main"> <div id="dark_mode">
+             <input class="container_toggle" type="checkbox" id="switch" name="mode">
+             <label for="switch">Toggle</label>
+           </div><h1 id="任务领取"><a href="https://wiki.smth.vip/#/welcome/assign?id=%e4%bb%bb%e5%8a%a1%e9%a2%86%e5%8f%96" data-id="任务领取" class="anchor"><span>任务领取</span></a></h1><blockquote>
+<p>提交方式见 <a href="https://wiki.smth.vip/#/welcome/dev_rules/commit_rules">悬赏任务提交规范</a></p></blockquote>
+<h3 id="奖励规格"><a href="https://wiki.smth.vip/#/welcome/assign?id=%e5%a5%96%e5%8a%b1%e8%a7%84%e6%a0%bc" data-id="奖励规格" class="anchor"><span>奖励规格</span></a></h3><ul><li>对于原创文章征稿，统一为<strong>10xan</strong>/篇</li><li>对于翻译文章悬赏，统一为<strong>1xan</strong>/千字</li><li>对于已有文章搬运，统一为<strong>2xan</strong>/篇<ul><li>注：格式要求与上述文章一致</li></ul></li></ul><p class="warn">所有为wiki做出贡献的人员，名字都会永远记录在wiki的感谢名录中</p><p class="tip">contr4l: 我知道这些都是白菜价甚至是黑心员工价，but you all know cn torn wiki needs you guys.</p><h3 id="已完成任务"><a href="https://wiki.smth.vip/#/welcome/assign?id=%e5%b7%b2%e5%ae%8c%e6%88%90%e4%bb%bb%e5%8a%a1" data-id="已完成任务" class="anchor"><span>已完成任务</span></a></h3><table>
+<thead>
+<tr>
+    <th align="center">序号</th>
+    <th align="center">页面</th>
+    <th align="center">领取人</th>
+    <th align="center">完成时间</th>
+    <th data-type="checkbox">悬赏发放</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+    <td align="center">1</td>
+    <td align="center">New Player Missions</td>
+    <td align="center">contr4l_[2893026]</td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+</tbody>
+
+</table>
+
+<h3 id="当前活跃任务"><a href="https://wiki.smth.vip/#/welcome/assign?id=%e5%bd%93%e5%89%8d%e6%b4%bb%e8%b7%83%e4%bb%bb%e5%8a%a1" data-id="当前活跃任务" class="anchor"><span>当前活跃任务</span></a></h3><table>
+<thead>
+<tr>
+    <th align="center">序号</th>
+    <th align="center">页面</th>
+    <th align="center">领取人</th>
+    <th align="center">完成时间</th>
+    <th data-type="checkbox">悬赏发放</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+    <td align="center">1</td>
+    <td align="center">New Player Missions</td>
+    <td align="center">contr4l_[2893026]</td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">2</td>
+    <td align="center"> API</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">3</td>
+    <td align="center"> Attacking</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">4</td>
+    <td align="center"> Award</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">5</td>
+    <td align="center"> Battle Stats</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">6</td>
+    <td align="center"> Companies</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">7</td>
+    <td align="center"> Donator</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">8</td>
+    <td align="center"> Drugs</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">9</td>
+    <td align="center"> Items</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">10</td>
+    <td align="center"> Travel</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">11</td>
+    <td align="center"> Hunting</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">12</td>
+    <td align="center"> Marriage</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">13</td>
+    <td align="center"> Merits</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">14</td>
+    <td align="center"> Nerve</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">15</td>
+    <td align="center"> Race Track</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">16</td>
+    <td align="center"> Reports</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">17</td>
+    <td align="center"> Stock Market</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+<tr>
+    <td align="center">18</td>
+    <td align="center"> Territories</td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td>false</td>
+</tr>
+
+</tbody>
+</table>
+<div class="giscus"><iframe class="giscus-frame" title="Comments" scrolling="no" allow="clipboard-write" src="./test_files/widget.html" loading="lazy" style="height: 274px;"></iframe></div></article></section></main>
+  <script src="./test_files/client.js" data-repo="contr4l/contr4l.github.io" data-repo-id="R_kgDOJK3l5w" data-category="Ideas" data-category-id="DIC_kwDOJK3l584CVWyZ" data-mapping="title" data-reactions-enabled="0" data-strict="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" id="giscus"></script><script>
+    window.$docsify = {
+      loadSidebar: true,
+      // autoHeader: true,
+      loadNavbar: true,
+      name: "Torn's City CN Wiki",
+      nameLink: '/#/README.md',
+      repo: 'https://github.com/contr4l/contr4l.github.io',
+      search: {
+          paths: 'auto',
+          placeholder: '请输入要搜索的关键字',
+          noData: '没有结果',
+          depth: 6,
+      },
+      disqus: 'torn-cnwiki',
+      // routerMode: 'history',
+      giscus:{
+        repo: "contr4l/contr4l.github.io",
+        repoId: "R_kgDOJK3l5w",
+        category: "Ideas",
+        categoryId: "DIC_kwDOJK3l584CVWyZ",
+        mapping: "title",
+        reactionsEnabled: "0",
+        strict: "0",
+        emitMetadata: "0",
+        inputPosition: "top",
+        theme: "preferred_color_scheme",
+        lang: "zh-CN",
+        loading: "lazy"
+      },
+      tabs: {
+        persist    : true,      // default
+        sync       : true,      // default
+        theme      : 'classic', // default
+        tabComments: true,      // default
+        tabHeadings: true       // default
+      },
+      relativePath: true,
+
+      toc: {
+        tocMaxLevel: 5,
+        target: 'h2, h3, h4, h5, h6',
+        ignoreHeaders:  ['<!-- {docsify-ignore} -->', '<!-- {docsify-ignore-all} -->']
+      },
+
+      themeColor: "#42b983",
+      dark: {
+        background: "#1c2022",
+        toggleBtnBg: "#34495e",
+        textColor: "#b4b4b4"
+      },
+      light: {
+        background: "white",
+        toggleBtnBg: "var(--theme-color)",
+        textColor: "var(--theme-color)"
+      }
+    }
+  </script>
+  <!-- <script src="/js/disqus.min.js"></script> -->
+
+  <!-- Docsify v4 -->
+  <script src="./test_files/docsify@4"></script>
+  <script src="./test_files/emoji.min.js"></script>
+  <script src="./test_files/docsify-copy-code.min.js"></script>
+  <!-- <script src="js/countable.js"></script> -->
+  <script src="./test_files/search.min.js"></script>
+  <script src="./test_files/docsify-tabs@1"></script>
+  <script src="./test_files/docsify-plugin-toc.min.js"></script>
+  <script src="./test_files/index.min.js"></script>
+  <script src="./test_files/zoom-image.min.js"></script>
+  
+  <script src="./test_files/docsify-giscus.min.js"></script>
+  <script src="./test_files/prism-bash.min.js"></script>
+  <script src="./test_files/prism-powershell.min.js"></script>
+
+
+
+
+
+<div class="progress" style="opacity: 0; width: 0%;"></div></body></html>
