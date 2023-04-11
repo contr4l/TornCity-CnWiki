@@ -29,42 +29,42 @@ https://wiki.torn.com/wiki
         <a href="https://github.com/contr4l">
             <img src="https://avatars.githubusercontent.com/u/30452426?v=4" width="100;" alt="contr4l"/>
             <br />
-            <sub><b>XiaoFang</b></sub>
+            <sub><b>contr4l</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/a2514281990">
             <img src="https://avatars.githubusercontent.com/u/55022133?v=4" width="100;" alt="a2514281990"/>
             <br />
-            <sub><b>Null</b></sub>
+            <sub><b>a2514281990</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/Cotory">
             <img src="https://avatars.githubusercontent.com/u/97867474?v=4" width="100;" alt="Cotory"/>
             <br />
-            <sub><b>Null</b></sub>
+            <sub><b>Cotory</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/smile2000">
             <img src="https://avatars.githubusercontent.com/u/14106056?v=4" width="100;" alt="smile2000"/>
             <br />
-            <sub><b>Null</b></sub>
+            <sub><b>smile2000</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/liushang07">
             <img src="https://avatars.githubusercontent.com/u/38568403?v=4" width="100;" alt="liushang07"/>
             <br />
-            <sub><b>Null</b></sub>
+            <sub><b>liushang07</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/slowtalk11">
             <img src="https://avatars.githubusercontent.com/u/40056669?v=4" width="100;" alt="slowtalk11"/>
             <br />
-            <sub><b>Null</b></sub>
+            <sub><b>slowtalk11</b></sub>
         </a>
     </td></tr>
 </table>
