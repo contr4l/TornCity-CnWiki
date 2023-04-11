@@ -84,7 +84,7 @@
 <tr>
     <td align="center">8</td>
     <td align="center">Drugs</td>
-    <td align="center"></td>
+    <td align="center">superxu[2848855]</td>
     <td align="center"></td>
     <td align="center">false</td>
 </tr>
@@ -116,7 +116,7 @@
 <tr>
     <td align="center">12</td>
     <td align="center">Marriage</td>
-    <td align="center"></td>
+    <td align="center">Elsevier[2695099]</td>
     <td align="center"></td>
     <td align="center">false</td>
 </tr>
@@ -207,7 +207,7 @@
 <tr>
     <td align="center">24</td>
     <td align="center">Crime</td>
-    <td align="center"></td>
+    <td align="center">Elsevier[2695099]</td>
     <td align="center"></td>
     <td align="center">false</td>
 </tr>

@@ -94,6 +94,9 @@
 <table class="wikitable table table-striped table table-striped prettyTable sortable">
 <tbody>
 <tr>
+<th colspan="6" align="center">Stock Benefits
+</th></tr>
+<tr>
 <th align="center">股票名称
 </th>
 <th align="center">缩写
