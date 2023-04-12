@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/light.css">
   <link rel="stylesheet" href="css/details.css">
-  <link rel="stylesheet" href="https://unpkg.com/docsify-giscus@1.0.0/dist/giscus.css">
 
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 
@@ -33,21 +32,13 @@
           noData: '没有结果',
           depth: 6,
       },
-      disqus: 'torn-cnwiki',
-      // routerMode: 'history',
-      giscus:{
-        repo: "contr4l/contr4l.github.io",
-        repoId: "R_kgDOJK3l5w",
-        category: "Ideas",
-        categoryId: "DIC_kwDOJK3l584CVWyZ",
-        mapping: "title",
-        reactionsEnabled: "0",
-        strict: "0",
-        emitMetadata: "0",
-        inputPosition: "top",
-        theme: "preferred_color_scheme",
-        lang: "zh-CN",
-        loading: "lazy"
+      Valine: {
+          el: '#vcomments',
+          appId: 'Kl2msbPoCRaOapws89GBj1qz-gzGzoHsz',
+          appKey: '6rL1ybtuBrsetn73z9qQycSw',
+          // docPath: 'hash', //default to `hash` ,or you can choose `full`
+          avatar: "robohash",
+          visitor: true,
       },
       
       tabs: {
@@ -77,9 +68,12 @@
   <script src="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   
-  <script src="https://unpkg.com/docsify-giscus@1.0.0/dist/docsify-giscus.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
+
+  <!-- discus -->
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script src="//unpkg.com/docsify-valine/dist/docsify-valine.min.js"></script>
 
   <script src="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/marked@4"></script>
