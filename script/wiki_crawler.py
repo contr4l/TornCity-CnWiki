@@ -35,7 +35,7 @@ def save_subpages(url):
             links.append(href)
     
     # 递归遍历所有链接，并保存它们的页面内容
-    for link in links:
-        save_subpages(link)
+    # for link in links:
+    #     save_subpages(link)
 
-save_subpages("https://wiki.torn.com/wiki")
+save_subpages("https://wiki.torn.com/wiki/New_Player_Missions")

@@ -6,7 +6,7 @@ Git以及github是目前可以说是流行最广的代码管理方案（类似�
 ## Git的安装
 git作为一个命令行程序，提供了一系列代码下载、提交、分支管理的功能，其下载地址为：[Git Download](https://git-scm.com/downloads)，对于Windows，通常选择**Standalone Installer：64-bit Setup**即可（如果是非常老旧的32bit系统，也可选择32-bit Setup）。
 
-<figure><img src="../.gitbook/assets/1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/1.png" alt=""><figcaption></figcaption></figure>
 
 此时按下`Win+R`，输入`powershell`并运行，在窗口中输入`git -v`，应当出现如下字样：
 
@@ -57,9 +57,9 @@ ssh-rsa ****** ctrl@CtrlPC
 # 5. 将刚才复制的一长串内容粘贴进Key的文本框，并点击Add SSH key，Title可以留空
 ```
 
-<figure><img src="../.gitbook/assets/2023032802.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/2023032802.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/2023032803.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/2023032803.png" alt=""><figcaption></figcaption></figure>
 
 ## Github仓库的拉取  
 现在你需要访问我们的[wiki所在的repo](https://github.com/contr4l/contr4l.github.io)。
@@ -67,14 +67,14 @@ ssh-rsa ****** ctrl@CtrlPC
 首先你需要将这个仓库`fork`到你的仓库内，这是能够进行修改并提交的基础。  
 
 !> 注意选项`clone main branch only`一定要取消勾选！因为我们是基于gh-pages分支进行开发的。  
-<figure><img src="../.gitbook/assets/2023032804.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/2023032804.png" alt=""><figcaption></figcaption></figure>
 
 
 现在你可以看到`contr4l.github.io`已经位于你的名下了，如下图所示。  
-<figure><img src="../.gitbook/assets/2023032805.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/2023032805.png" alt=""><figcaption></figcaption></figure>
 
 接下来我们进行代码拉取，首先找到SSH的代码拉取地址，如下图所示，然后在`powershell`中输入`git clone {刚才你复制的以.git结尾的地址}`。  
-<figure><img src="../.gitbook/assets/2023032806.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/2023032806.png" alt=""><figcaption></figcaption></figure>
 
 
 ```bash
@@ -158,13 +158,13 @@ git push origin gh-pages
 1. 原始分支和目标分支都要选择gh-pages（如果你本地在其他分支进行了操作，根据实际情况确定）
 2. 一定是从自己的仓库创建`pull request`而非contr4l的仓库  
 
-<figure><img src="../.gitbook/assets/2023032807.png" alt=""><figcaption></figcaption></figure>  
+<figure><img src="../_images/assets/2023032807.png" alt=""><figcaption></figcaption></figure>  
 
-<figure><img src="../.gitbook/assets/2023032808.png" alt=""><figcaption></figcaption></figure>  
+<figure><img src="../_images/assets/2023032808.png" alt=""><figcaption></figcaption></figure>  
 
 接下来你可以看到在contr4l的仓库的`pull request`列表出现了你的新的PR申请，如下图所示
 
-<figure><img src="../.gitbook/assets/2023032809.png" alt=""><figcaption></figcaption></figure>  
+<figure><img src="../_images/assets/2023032809.png" alt=""><figcaption></figcaption></figure>  
 
 > 此时一是要检查下方的修改内容是否和自己修改的一致  
 

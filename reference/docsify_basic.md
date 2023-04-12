@@ -9,7 +9,7 @@
 ### Node.js 安装
 官方下载地址为[Node.js](https://nodejs.org/en)，通常建议下载`LTS`版本。  
 
-![](../.gitbook/assets/2023032901.png)
+![](../_images/assets/2023032901.png)
 
 注意安装过程中如果有是否将node/npm添加至环境变量的选项需要勾上。 `Add xxx to environment PATH`
 
@@ -36,11 +36,11 @@ npm i docsify-cli -g
 
 > 注意此处环境变量的路径要根据自己系统中docsify.ps1所在的位置确定，每个人是不一样的 
 
-![2](../.gitbook/assets/2023032902.png)  
+![2](../_images/assets/2023032902.png)  
 
-![3](../.gitbook/assets/2023032903.png)  
+![3](../_images/assets/2023032903.png)  
 
-![4](../.gitbook/assets/2023032904.png)  
+![4](../_images/assets/2023032904.png)  
 
 使用管理员权限打开powershell并输入`set-ExecutionPolicy RemoteSigned`增加自定义脚本执行权限。
 ```powershell
@@ -85,5 +85,5 @@ Listening at http://localhost:3000
 
 # 最后在浏览器中访问http://localhost:3000查看效果
 ```
-![4](../.gitbook/assets/2023032906.png)  
+![4](../_images/assets/2023032906.png)  
 

@@ -20,7 +20,7 @@ Markdown本身是一种语法规则，我们可以简单地理解成，当我们
 
 双击运行会显示如下窗口，（通常我会建议使用者不对界面进行汉化）
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 常用的快捷键：
 
@@ -38,17 +38,17 @@ Markdown本身是一种语法规则，我们可以简单地理解成，当我们
 
 在VsCode界面，按下`Ctrl+Shift+X`进入插件界面，如下图所示，INSTALLED部分就是当前本机已经安装的插件。
 
-<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 在上方搜索框中，输入Markdown并回车，我们可以查询当前插件市场中有的Markdown相关的插件，我们选择`Markdown All in One`并点击Install执行安装。（此处由于我已经完成了安装，此处显示的是Uninstall ，即卸载😄）
 
-<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 ### Markdown实时预览 <a href="#markdown-shi-shi-yu-lan" id="markdown-shi-shi-yu-lan"></a>
 
 我们首先按下`Ctrl+N`新建一个文档并保存命名为Example.md（VsCode可以根据文件的后缀名确定当前文件内容应该按照什么语法来执行高亮）
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 我们按照Markdown语法输入如下文本：
 
@@ -70,17 +70,17 @@ Markdown本身是一种语法规则，我们可以简单地理解成，当我们
 
 接下来按下`Ctrl+Shift+P`，出现功能选择框：
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 我们输入`Preview`，并选择`Markdown: Open Preview to the Side`
 
 > 此处我的判断有误，VsCode原生支持Markdown，不需要安装插件也可以，不过插件功能是值得专门介绍的。
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 会得到如下图所示的效果
 
-<figure><img src="../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 而后我们可以任意在左侧方框中编辑内容，实际渲染的效果会在右侧同步显示出来。
 
@@ -88,13 +88,13 @@ Markdown本身是一种语法规则，我们可以简单地理解成，当我们
 
 如果我们想要得到一个如同右侧显示效果的文件（如pdf），我们可以安装如下图所示的插件，然后同样通过`Ctrl+Shift+P`搜索相关的功能进行导出。
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 这样我们可以得到如下的文件
 
-<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../_images/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 ### 其他 <a href="#qi-ta" id="qi-ta"></a>
 

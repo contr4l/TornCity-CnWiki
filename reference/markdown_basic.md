@@ -139,7 +139,7 @@ u=702257389,1274025419&fm=27&gp=0.jpg)
 
 效果如下：
 
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption><p>blockchain</p></figcaption></figure>
+<figure><img src="../_images/assets/image (9).png" alt=""><figcaption><p>blockchain</p></figcaption></figure>
 
 ### 六、超链接
 
