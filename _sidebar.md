@@ -4,6 +4,7 @@
   * [施工规范](/welcome/dev_rules/README.md)
     * [悬赏材料提交规范](/welcome/dev_rules/commit_rules.md)
     * [悬赏材料格式规范](/welcome/dev_rules/material_rules.md)
+    * [翻译术语对照表](/welcome/dev_rules/glossary.md)
   * [任务领取](/welcome/assign.md)
 
 * [🔗 快速链接](/quicklink/1.-xin-shou-ren-wu.md)
