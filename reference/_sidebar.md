@@ -4,8 +4,8 @@
 
 * [🚙 功能区](/area/1.-cheng-shi.md)
 
-* [🔎 导航](/navigation/1.-zhu-ye.md)
-  <!-- * [1.主页](/navigation/1.-zhu-ye.md)
+* [🔎 导航](/navigation/README.md)
+  <!-- * [1.主页](/navigation/README.md)
   * [2.贡献者](/navigation/2.-gong-xian-zhe.md)
   * [3.社区门户](/navigation/3.-she-qu-men-hu.md)
   * [4.使用协议](/navigation/4.-shi-yong-xie-yi.md)

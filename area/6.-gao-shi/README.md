@@ -66,7 +66,7 @@ ___
 
 - 通过加入[公司](/-gong-si.md)来增加胆量条
 - 通过加入升级胆量条加成的[帮派](/area/14.-bang-pai.md)
-- 使用[Merit](/quicklink/13.-gong-xun.md)来升级你的胆量条
+- 使用[Merit](/quicklink/13.-merits/README.md)来升级你的胆量条
 
 想更好的规划搞事生涯，请参阅[生存手册-搞事路线规划](https://docs.qq.com/doc/DQVpRd0dTUkVuV3Vm?tdsourcetag=s_pcqq_send_grpfile&ADUIN=1250805654&ADSESSION=1589767052&ADTAG=CLIENT.QQ.5737_.0&ADPUBNO=27010&u=bfd3ac0b95fc4bfbbd4e949991af735e)
 
@@ -74,7 +74,7 @@ ___
 ___
 
 - 完成教育课程[PSY3690 Bachelor of Psychological Sciences](/area/5.-jiao-yu.md)后，提供10%搞事成功率（集体搞事不享受该加成）
-- 增加CE [Merit](/quicklink/13.-gong-xun.md)，每一级都会增加搞事所获CE的3%（根据helper解释，Merit增加的CE为搞事所获的CE，并非对总CE进行Buff加成，在这样的情况下，重置Merit也不会减少总CE。未得到实践证实，Chedburn也未对此说明）
+- 增加CE [Merit](/quicklink/13.-merits/README.md)，每一级都会增加搞事所获CE的3%（根据helper解释，Merit增加的CE为搞事所获的CE，并非对总CE进行Buff加成，在这样的情况下，重置Merit也不会减少总CE。未得到实践证实，Chedburn也未对此说明）
 - 升级Criminality的帮派会提供最多25%的CE（同Merit提供的CE），每一级会增加1%
 - 进行不同类型的搞事时，拥有相应的[搞事成功率增长器](Enhancer.md)
 

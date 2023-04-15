@@ -14,7 +14,7 @@
   * [10.旅行](/quicklink/10.-lv-hang.md)
   * [11.狩猎](/quicklink/11.-shou-lie.md)
   * [12.婚姻](/quicklink/12.-hun-yin.md)
-  * [13.功勋](/quicklink/13.-gong-xun.md)
+  * [13.成就](/quicklink/13.-merits/README.md)
   * [14.胆量](/quicklink/14.-dan-liang.md)
   * [15.赛车](/quicklink/15.-sai-che.md)
   * [16.反馈](/quicklink/16.-fan-kui.md)
@@ -23,7 +23,7 @@
 
 * [🚙 功能区](/area/1.-cheng-shi.md)
 
-* [🔎 导航](/navigation/1.-zhu-ye.md)
+* [🔎 导航](/navigation/README.md)
 
 * [🧑 关于我们](/aboutus/who-are-we.md)
   <!-- * [Who are we](/aboutus/who-are-we.md) -->

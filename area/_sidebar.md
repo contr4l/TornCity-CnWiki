@@ -16,10 +16,10 @@
   * [11.赌场](/area/11.-du-chang.md)
   * [12.论坛](/area/12.-lun-tan.md)
   * [13.名人堂](/area/13.-ming-ren-tang.md)
-  * [14.帮派](/area/14.-bang-pai.md)
+  * [14.帮派](/area/14.-faction/README.md)
 
-* [🔎 导航](/navigation/1.-zhu-ye.md)
-  <!-- * [1.主页](/navigation/1.-zhu-ye.md)
+* [🔎 导航](/navigation/README.md)
+  <!-- * [1.主页](/navigation/README.md)
   * [2.贡献者](/navigation/2.-gong-xian-zhe.md)
   * [3.社区门户](/navigation/3.-she-qu-men-hu.md)
   * [4.使用协议](/navigation/4.-shi-yong-xie-yi.md)

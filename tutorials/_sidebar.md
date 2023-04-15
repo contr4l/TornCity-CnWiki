@@ -10,7 +10,7 @@
 
 * [🚙 功能区](/area/1.-cheng-shi.md)
 
-* [🔎 导航](/navigation/1.-zhu-ye.md)
+* [🔎 导航](/navigation/README.md)
 
 * [🧑 关于我们](/aboutus/who-are-we.md)
   <!-- * [Who are we](/aboutus/who-are-we.md) -->

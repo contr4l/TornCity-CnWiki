@@ -36,7 +36,7 @@
 <tr>
     <td align="center">2</td>
     <td align="center">API</td>
-    <td align="center"></td>
+    <td align="center">SCP-173[2549133]</td>
     <td align="center"></td>
     <td align="center">false</td>
 </tr>
@@ -44,7 +44,7 @@
 <tr>
     <td align="center">3</td>
     <td align="center">Attacking</td>
-    <td align="center"></td>
+    <td align="center">SCP-173[2549133]</td>
     <td align="center"></td>
     <td align="center">false</td>
 </tr>
@@ -256,7 +256,7 @@
 <tr>
     <td align="center">31</td>
     <td align="center">Faction</td>
-    <td align="center"></td>
+    <td align="center">contr4l_[2893026]</td>
     <td align="center"></td>
     <td align="center">false</td>
 </tr>
