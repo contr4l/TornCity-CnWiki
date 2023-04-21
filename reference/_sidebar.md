@@ -19,7 +19,7 @@
 * [📖 参考文献](/reference/vscode_install.md)
   * [VsCode安装、插件安装、Markdown预览](/reference/vscode_install.md)
   * [Markdown基本语法](/reference/markdown_basic.md)
-  * [正则表达式语法](/reference/regex_basic.md)
+  * [正则表达式语法](/reference/**regex_basic**.md)
   * [Git及Github基本功能介绍](/reference/git_basic.md)
   * [Docsify基本功能介绍](/reference/docsify_basic.md)
 
