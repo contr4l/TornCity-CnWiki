@@ -11,6 +11,7 @@ default_csv_list = [income_table_name, employee_table_name]
 
 def set_key(key):
     global global_key
+    print("set key to {}".format(key))
     global_key = key
 
 def get_data_json(selections : str, key : str = global_key) -> json:
@@ -18,6 +19,7 @@ def get_data_json(selections : str, key : str = global_key) -> json:
         selections, key
     )
 
+    print("send requests {}".format(url))
     res = requests.get(url)
     if res.status_code != 200:
         print("api request gets negative response!")
@@ -25,7 +27,7 @@ def get_data_json(selections : str, key : str = global_key) -> json:
 
     return json.loads(res.text)
 
-def get_detailed_info(key = global_key):
+def get_detailed_info():
     """
     "company_detailed": {
                 "ID": 99636,
@@ -45,9 +47,9 @@ def get_detailed_info(key = global_key):
                 "value": 1533911497,
         }
     """
-    return get_data_json("detailed", key)
+    return get_data_json("detailed", global_key)
 
-def get_profile(key = global_key):
+def get_profile():
     """
     "company": {
             "ID": 99636,
@@ -83,9 +85,9 @@ def get_profile(key = global_key):
                 }
             }
     """
-    return get_data_json("profile", key)
+    return get_data_json("profile", global_key)
 
-def get_employees(key = global_key):
+def get_employees():
     """
     {
         "company_employees": {
@@ -121,9 +123,9 @@ def get_employees(key = global_key):
         }
     }
     """
-    return get_data_json("employees", key)
+    return get_data_json("employees", global_key)
 
-def get_price(key = global_key):
+def get_price():
     """
     {
         "company_stock": {
@@ -139,7 +141,20 @@ def get_price(key = global_key):
             }
     }
     """
-    return get_data_json("stock", key)
+    return get_data_json("stock", global_key)
+
+
+detail = {}
+price = {}
+profile = {}
+employees = {}
+def get_all_data():
+    global detail, price, profile, employees
+
+    detail = get_detailed_info()
+    price = get_price()
+    profile = get_profile()
+    employees = get_employees()
 
 import datetime
 def get_ymd():
@@ -147,8 +162,18 @@ def get_ymd():
     tm = datetime.datetime.now()
     return "{}/{}/{}".format(now.year, now.month, now.day), "{}:{}:{}".format(tm.hour, tm.minute, tm.second)
 
+def get_loc(df: pd.DataFrame, ymd):
+    loc = df.shape[0]
+    if ymd in df["日期"].values:
+        print("updating...")
+        loc = df[df["日期"] == ymd].index[0]
+    else:
+        print("creating...")
+    
+    return loc
+
 import os
-def record_income_table(key = global_key):
+def record_income_table():
     print("record income table...")
     columns = ['序号', '日期', 'Training Contract', 'Protection Contract',
                'Engagement Contract', 'Military Contract', '生产日期', '收入', '工资', '广告费',
@@ -156,26 +181,19 @@ def record_income_table(key = global_key):
     
     header = False
     if os.path.exists(income_table_name):
-        df = pd.read_csv(income_table_name, names=columns)
+        df = pd.read_csv(income_table_name, names=columns, encoding="gbk")
     else:
         header = True
         df = pd.DataFrame(columns=columns)
-    
-    loc = df.shape[0]
 
     ymd, hms = get_ymd()
     
-    
-    if ymd in df["日期"].values:
-        print("update...")
-        loc = df[df["日期"] == ymd].index[0]
-    else:
-        print("creating...")
+    loc = get_loc(df, ymd)
 
-    detail = get_detailed_info(key)
-    price = get_price(key)
-    profile = get_profile(key)
-    employees = get_employees(key)
+    detail = get_detailed_info()
+    price = get_price()
+    profile = get_profile()
+    employees = get_employees()
 
     df.loc[loc, "序号"] = int(df.loc[loc-1, "序号"]) + 1 if loc > 1 else 1
     
@@ -209,7 +227,49 @@ def record_income_table(key = global_key):
 
     df.loc[loc, "记录时间"] = ymd + " " + hms
 
-    df.to_csv(income_table_name, index=0, header=header)
+    df.to_csv(income_table_name, index=0, header=header, encoding="gbk")
+
+from math import ceil
+def record_employee_table():
+    columns = ["日期","岗位","天数","MAN","INT","END", "属", "估", "登", "名字", "天", "点", "课", "理", "药", "离", "总", "薪", "参"]
+
+    header = False
+    if os.path.exists(employee_table_name):
+        df = pd.read_csv(employee_table_name, names=columns, encoding="gbk")
+    else:
+        header = True
+        df = pd.DataFrame(columns=columns)
+
+    ymd, hms = get_ymd()
+    loc = get_loc(df, ymd)
+
+    ppl_data = employees["company_employees"]
+    for ppl in ppl_data:
+        df.loc[loc, "日期"] = ymd
+        df.loc[loc, "岗位"] = ppl_data[ppl]["position"]
+        df.loc[loc, "天数"] = ppl_data[ppl]["days_in_company"]
+        df.loc[loc, "MAN"] = ppl_data[ppl]["manual_labor"]
+        df.loc[loc, "INT"] = ppl_data[ppl]["intelligence"]
+        df.loc[loc, "END"] = ppl_data[ppl]["endurance"]
+        df.loc[loc, "属"] = ppl_data[ppl]["effectiveness"].get("working_stats", "NA")
+        df.loc[loc, "估"] = "---"
+        df.loc[loc, "登"] = ppl_data[ppl]["last_action"]["relative"]
+        df.loc[loc, "名字"] = ppl_data[ppl]["name"]
+        df.loc[loc, "天"] = ppl_data[ppl]["effectiveness"].get("settled_in", "NA")
+        df.loc[loc, "点"] = ppl_data[ppl]["effectiveness"].get("merits", "NA")
+        df.loc[loc, "课"] = "---"
+        df.loc[loc, "理"] = ppl_data[ppl]["effectiveness"].get("management", 0)
+        df.loc[loc, "药"] = ppl_data[ppl]["effectiveness"].get("addiction", 0)
+        df.loc[loc, "离"] = "---"
+        df.loc[loc, "总"] = ppl_data[ppl]["effectiveness"]["total"]
+        df.loc[loc, "薪"] = "$" + str(ppl_data[ppl]["wage"])
+        df.loc[loc, "参"] = "---"
+        loc += 1
+
+    df.to_csv(employee_table_name, index=0, header=header, encoding="gbk")
+    
+
+
 
 def merge_csv_files(csv_files : list = default_csv_list):
     writer = pd.ExcelWriter("company_data.xlsx")
@@ -222,4 +282,7 @@ def merge_csv_files(csv_files : list = default_csv_list):
 
 
 if __name__ == "__main__":
-    record_income_table("Put your key here")
+    set_key("")
+    get_all_data()
+    # record_income_table()
+    record_employee_table()

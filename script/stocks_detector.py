@@ -82,6 +82,8 @@ def store_stock_data(key = global_key):
     
     df.to_csv(stocks_data_name, index=0, header=header)
 
+
+
 import time
 if __name__ == "__main__":
     while True:
