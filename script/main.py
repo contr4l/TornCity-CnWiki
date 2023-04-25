@@ -17,8 +17,8 @@ def recursive_translate(agent: translate_agent):
     filelist = []
     for file in filelist:
         # locate save path
-        savepath = ""
-        g = open(savepath, 'w')
+        save_path = ""
+        g = open(save_path, 'w')
         with open(file, "r") as f:
             content = f.readlines()
             # translate html to markdown info
