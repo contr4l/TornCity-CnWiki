@@ -1,0 +1,56 @@
+table.prettyTable {
+    border: 1px solid #72a0c1
+}
+
+table.prettyTable th.header {
+    background-color: #72a0c1;
+    color: #fff;
+    font-family: FjallaOne
+}
+
+table.prettyTable th.subheader,table.prettyTable thead th {
+    background-color: #edf5fa;
+    color: #000;
+    font-family: FjallaOne;
+    border: 1px solid #72a0c1
+}
+
+.mw-parser-output .prettyTable tr:nth-child(even) {
+    background: #f3f3f3
+}
+
+.mw-parser-output .prettyTable tr:nth-child(odd) {
+    background: #fff
+}
+
+table.navBar {
+    outline: solid grey 1px
+}
+
+table.navBar th.header,table.navBar.mw-collapsible th.header {
+    background-color: #ddf!important;
+    padding: 2px!important;
+    text-align: center;
+    border: solid #fafaff 2px
+}
+
+table.navBar th.subheader,table.navBar thead th.subheader {
+    background-color: #e8e8fa;
+    vertical-align: middle;
+    text-align: center;
+    border: solid #fafaff 2px
+}
+
+table.navBar td.navCell,table.navBar td.navCell {
+    background-color: #f5f5fa;
+    vertical-align: middle;
+    text-align: left;
+    border: solid #fafaff 2px
+}
+
+table.navBar td.bottomBar,table.navBar tfoot td.bottomBar {
+    background-color: #ddf;
+    text-align: center;
+    border: solid #fafaff 2px;
+    padding: 2px!important
+}
