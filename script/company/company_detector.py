@@ -181,7 +181,7 @@ def record_income_table():
     
     header = False
     if os.path.exists(income_table_name):
-        df = pd.read_csv(income_table_name, names=columns, encoding="gbk")
+        df = pd.read_csv(income_table_name, names=columns, encoding="utf8")
     else:
         header = True
         df = pd.DataFrame(columns=columns)
@@ -227,7 +227,7 @@ def record_income_table():
 
     df.loc[loc, "记录时间"] = ymd + " " + hms
 
-    df.to_csv(income_table_name, index=0, header=header, encoding="gbk")
+    df.to_csv(income_table_name, index=0, header=header, encoding="utf8")
 
 from math import ceil
 def record_employee_table():
@@ -235,7 +235,7 @@ def record_employee_table():
 
     header = False
     if os.path.exists(employee_table_name):
-        df = pd.read_csv(employee_table_name, names=columns, encoding="gbk")
+        df = pd.read_csv(employee_table_name, names=columns, encoding="utf8")
     else:
         header = True
         df = pd.DataFrame(columns=columns)
@@ -251,12 +251,12 @@ def record_employee_table():
         df.loc[loc, "MAN"] = ppl_data[ppl]["manual_labor"]
         df.loc[loc, "INT"] = ppl_data[ppl]["intelligence"]
         df.loc[loc, "END"] = ppl_data[ppl]["endurance"]
-        df.loc[loc, "属"] = ppl_data[ppl]["effectiveness"].get("working_stats", "NA")
+        df.loc[loc, "属"] = ppl_data[ppl]["effectiveness"].get("working_stats", 0)
         df.loc[loc, "估"] = "---"
         df.loc[loc, "登"] = ppl_data[ppl]["last_action"]["relative"]
         df.loc[loc, "名字"] = ppl_data[ppl]["name"]
-        df.loc[loc, "天"] = ppl_data[ppl]["effectiveness"].get("settled_in", "NA")
-        df.loc[loc, "点"] = ppl_data[ppl]["effectiveness"].get("merits", "NA")
+        df.loc[loc, "天"] = ppl_data[ppl]["effectiveness"].get("settled_in", 0)
+        df.loc[loc, "点"] = ppl_data[ppl]["effectiveness"].get("merits", 0)
         df.loc[loc, "课"] = "---"
         df.loc[loc, "理"] = ppl_data[ppl]["effectiveness"].get("management", 0)
         df.loc[loc, "药"] = ppl_data[ppl]["effectiveness"].get("addiction", 0)
@@ -266,7 +266,7 @@ def record_employee_table():
         df.loc[loc, "参"] = "---"
         loc += 1
 
-    df.to_csv(employee_table_name, index=0, header=header, encoding="gbk")
+    df.to_csv(employee_table_name, index=0, header=header, encoding="utf8")
     
 
 
@@ -282,7 +282,7 @@ def merge_csv_files(csv_files : list = default_csv_list):
 
 
 if __name__ == "__main__":
-    set_key("")
+    set_key("GkGCcSyK7Fa359MT")
     get_all_data()
-    # record_income_table()
+    record_income_table()
     record_employee_table()
