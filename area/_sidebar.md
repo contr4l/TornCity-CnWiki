@@ -1,6 +1,6 @@
 * [🌆 欢迎页](/README.md)
 
-* [🔗 快速链接](/quicklink/1.-xin-shou-ren-wu.md)
+* [🔗 快速链接](/quicklink/1.-newbie_mission/README.md)
 
 * [🚙 功能区](/area/1.-cheng-shi.md)
   * [1.城市](/area/1.-cheng-shi.md)

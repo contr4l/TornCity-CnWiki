@@ -60,7 +60,7 @@
 
 关于股票的价格，Chedburn做了如下评论
 <sup id="cite_ref-1" class="reference">
-    <a href="#/quicklink/17.-gu-shi/README?id=cite_note-1">[1]</a>
+    <a href="#/quicklink/17.-stock_market/README?id=cite_note-1">[1]</a>
 </sup>。
 
 - 现在的价格变动是每分钟一次（而不是每15分钟一次），而且是基于现实世界中与Torn公司相同行业的股票；我们将无法提供比这更多的信息。

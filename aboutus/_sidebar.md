@@ -6,7 +6,7 @@
     * [悬赏材料格式规范](/welcome/dev_rules/material_rules.md)
   * [任务领取](/welcome/assign.md) -->
 
-* [🔗 快速链接](/quicklink/1.-xin-shou-ren-wu.md)
+* [🔗 快速链接](/quicklink/1.-newbie_mission/README.md)
 
 * [🚙 功能区](/area/1.-cheng-shi.md)
 
