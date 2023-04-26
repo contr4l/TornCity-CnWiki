@@ -2,9 +2,9 @@
 
 * [🔗 快速链接](/quicklink/1.-newbie_mission/README.md)
 
-* [🚙 功能区](/area/1.-cheng-shi.md)
-  * [1.城市](/area/1.-cheng-shi.md)
-  * [2.工作](/area/2.-gong-zuo.md)
+* [🚙 功能区](/area/1.-city/README.md)
+  * [1.城市](/area/1.-city/README.md)
+  * [2.工作](/area/2.-jobs/README.md)
   * [3.健身房](/area/3.-gym/README.md)
   * [4.私人资产](/area/4.-si-ren-zi-chan.md)
   * [5.教育](/area/5.-jiao-yu.md)

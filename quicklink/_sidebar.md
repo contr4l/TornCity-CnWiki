@@ -21,7 +21,7 @@
   * [17.股市](/quicklink/17.-stock_market/README.md)
   * [18.领土](/quicklink/18.-territory/README.md)
 
-* [🚙 功能区](/area/1.-cheng-shi.md)
+* [🚙 功能区](/area/1.-city/README.md)
 
 * [🔎 导航](/navigation/README.md)
 

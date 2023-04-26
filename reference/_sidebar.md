@@ -2,7 +2,7 @@
 
 * [🔗 快速链接](/quicklink/1.-newbie_mission/README.md)
 
-* [🚙 功能区](/area/1.-cheng-shi.md)
+* [🚙 功能区](/area/1.-city/README.md)
 
 * [🔎 导航](/navigation/README.md)
   <!-- * [1.主页](/navigation/README.md)
