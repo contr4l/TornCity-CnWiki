@@ -1,11 +1,15 @@
 import requests
 import json
 import pandas as pd
+import os
 
 global_key = ""
 
-income_table_name = "income_table.csv"
-employee_table_name = "employee_table.csv"
+current_dir = os.path.dirname(os.path.abspath(__file__)) + "/"
+income_table_name = current_dir+"income_table.csv"
+employee_table_name = current_dir+"employee_table.csv"
+
+print("income file is {}\n employee file is {}\n".format(income_table_name, employee_table_name))
 
 default_csv_list = [income_table_name, employee_table_name]
 
@@ -172,7 +176,6 @@ def get_loc(df: pd.DataFrame, ymd):
     
     return loc
 
-import os
 def record_income_table():
     print("record income table...")
     columns = ['序号', '日期', 'Training Contract', 'Protection Contract',
