@@ -176,6 +176,8 @@ def get_loc(df: pd.DataFrame, ymd):
     
     return loc
 
+
+
 def record_income_table():
     print("record income table...")
     columns = ['序号', '日期', 'Training Contract', 'Protection Contract',
@@ -260,10 +262,10 @@ def record_employee_table():
         df.loc[loc, "名字"] = ppl_data[ppl]["name"]
         df.loc[loc, "天"] = ppl_data[ppl]["effectiveness"].get("settled_in", 0)
         df.loc[loc, "点"] = ppl_data[ppl]["effectiveness"].get("merits", 0)
-        df.loc[loc, "课"] = "---"
+        df.loc[loc, "课"] = ppl_data[ppl]["effectiveness"].get("director_education", 0)
         df.loc[loc, "理"] = ppl_data[ppl]["effectiveness"].get("management", 0)
         df.loc[loc, "药"] = ppl_data[ppl]["effectiveness"].get("addiction", 0)
-        df.loc[loc, "离"] = "---"
+        df.loc[loc, "离"] = ppl_data[ppl]["effectiveness"].get("inactivity", 0)
         df.loc[loc, "总"] = ppl_data[ppl]["effectiveness"]["total"]
         df.loc[loc, "薪"] = "$" + str(ppl_data[ppl]["wage"])
         df.loc[loc, "参"] = "---"
