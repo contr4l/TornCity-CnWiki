@@ -1,4 +1,4 @@
-from od_detector import set_key,faction_dict, get_user_list
+from od_detector import faction_dict, get_user_list, set_key
 
 def save_name_tid():
     f = open("name_tid.csv", "w")
@@ -16,5 +16,5 @@ def get_name_tid():
         res = dict(list(res.items()) + list(users.items()))
     return res
 
-# set_key("GkGCcSyK7Fa359MT")
-# save_name_tid()
+set_key("GkGCcSyK7Fa359MT")
+save_name_tid()
