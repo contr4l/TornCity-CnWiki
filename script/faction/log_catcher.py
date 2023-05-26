@@ -132,5 +132,4 @@ class TornLogCatcher:
                 tid, name = line.split(",")
                 map_[int(tid)] = name
         return map_
-    
-    
+

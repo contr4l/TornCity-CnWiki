@@ -47,7 +47,22 @@ var special_energy_per_train_list = [
     25, 25, 50, 50, 50, 50, 25, 10
 ]
 
-var gym_name_list = [
+var STR = 0, DEF = 1, SPD = 2, DEX = 3;
+var SOFT_CAP = 50000000;
+var LIGHT_IDX  = light_dots.length;
+var MIDDLE_IDX = LIGHT_IDX + middle_dots.length;
+var HEAVY_IDX  = MIDDLE_IDX + heavy_dots.length;
+
+var all_gyms_dots = light_dots.concat(middle_dots)
+                              .concat(heavy_dots)
+                              .concat(special_dots);
+
+var A_list = [1600, 1600, 1800, 2100];
+var B_list = [1700, 2000, 1500, -600];
+var C_list = [700,  1350, 1000, 1500];
+
+/*************** 以下为对外提供的变量常量 ****************/ 
+export const gym_name_list = [
     // light
     "Premier Fitness", "Average Joes", "Woody's Workout", "Beach Bods", "Silver Gym", "Pour Femme", "Davies Den", "Global Gym",
 
@@ -61,28 +76,15 @@ var gym_name_list = [
     "Balboas Gym", "Frontline Fitness", "Gym 3000", "Mr. Isoyamas", "Total Rebound", "Elites", "The Sports Science Lab",    "Fight Club"
 ]
 
-var gym_exp = [
+export const gym_exp = [
     200, 500, 1000, 2000, 2750, 3000, 3500, 4000, // light
     6000, 7000, 8000, 11000, 12420, 18000, 18100, 24140, // middle
-    31260, 36610, 46640, 56520, 67775, 84535, 106305, Nan, // heavy
-    Nan, Nan, Nan, Nan, Nan, Nan, Nan, Nan // special
+    31260, 36610, 46640, 56520, 67775, 84535, 106305, 200000, // heavy
+    NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN // special
 ]
 
-var STR = 0, DEF = 1, SPD = 2, DEX = 3;
-var SOFT_CAP = 50000000;
-var LIGHT_IDX  = light_dots.length;
-var MIDDLE_IDX = LIGHT_IDX + middle_dots.length;
-var HEAVY_IDX  = MIDDLE_IDX + heavy_dots.length;
+export const stats_idx_map = {"str":STR, "def":DEF, "spd":SPD, "dex":DEX};
 
-var stats_idx_map = {"str":STR, "def":DEF, "spd":SPD, "dex":DEX};
-
-var all_gyms_dots = light_dots.concat(middle_dots)
-                              .concat(heavy_dots)
-                              .concat(special_dots);
-
-var A_list = [1600, 1600, 1800, 2100];
-var B_list = [1700, 2000, 1500, -600];
-var C_list = [700,  1350, 1000, 1500];
 
 function new_round(n, m) {
     // round n to m decimals
@@ -93,7 +95,33 @@ function soft_cap(current_stats) {
     return SOFT_CAP + (current_stats - SOFT_CAP) / (8.77635 * Math.log10(current_stats))
 }
 
-function find_gym_idx(input_gym_name)
+function valdr_formula(C3, D3, K3, H3, G3, A, B)
+{
+    // C3 = gym dots
+    // D3 = Energy per Train
+    // K3 = Bonus Multiplier
+    // H3 = current_stats
+    // G3 = Happy
+    // =(1/200000)*C3*D3*(K3)*(IF(H3<50000000,H3,(H3-50000000)/(8.77635*LOG(H3))+50000000)*ROUND(1+0.07*ROUND(LN(1+G3/250),4),4)+8*G3^1.05+VLOOKUP(B3,Sheet2!K1:M4,2,FALSE)*(1-(G3/99999)^2)+VLOOKUP(B3,Sheet2!K1:M4,3,FALSE))
+    // console.log(`C3=${C3}, D3=${D3}, K3=${K3}, H3=${H3}, G3=${G3}, A=${A}, B=${B}`);
+
+    let gains = 1;
+    gains = gains * 1 / 200000;
+    gains = gains * C3 * D3 * K3;
+
+    let Sp = H3 * new_round(1 + 0.07 * new_round(Math.log(1 + G3 / 250), 4), 4);
+    Sp = Sp + 8 * Math.pow(G3, 1.05);
+    Sp = Sp + (1 - Math.pow(G3 / 99999, 2)) * A;
+    Sp = Sp + B;
+   
+    // console.log(`gains = ${gains}, Sp = ${Sp}`);
+    gains = gains * Sp;
+    // console.log(`current_stats is ${H3}, gains = ${gains}`);
+    return gains;
+}
+
+/*************** 以下为对外提供函数接口 ****************/ 
+export function find_gym_idx(input_gym_name)
 {
     let gym_idx = 0;
     for (; gym_idx < gym_name_list.length; gym_idx++)
@@ -104,30 +132,29 @@ function find_gym_idx(input_gym_name)
     return gym_idx;
 }
 
-function valdr_formula(C3, D3, K3, H3, G3, A, B)
-{
-    // C3 = gym dots
-    // D3 = Energy per Train
-    // K3 = Bonus Multiplier
-    // H3 = current_stats
-    // G3 = Happy
+export function get_energy_per_train(gym_idx) {
+    let energy_per_train = 0;
 
-    let gains = 1;
-    gains = gains * 1 / 200000;
-    gains = gains * C3 * D3 * K3;
-    gains = gains * H3;
-    gains = gains * new_round(1 + 0.07 * new_round(Math.log(1 + G3 / 250), 4), 4);
-    gains = gains + 8 * Math.pow(G3, 1.05);
-    gains = gains + (1 - Math.pow(G3 / 99999, 2)) * A;
-    gains = gains + B;
-    
-    return gains;
+    if (gym_idx < LIGHT_IDX) {
+        energy_per_train = 5;
+    } else if (gym_idx < HEAVY_IDX) {
+        energy_per_train = 10;
+    } else {
+        energy_per_train = special_energy_per_train_list[gym_idx - HEAVY_IDX];
+    }
+    return energy_per_train;
 }
 
-function single_train_gains(stats_name, input_gym_name, current_stats, current_happy, current_bonus)
+export function get_total_train_times(gym_idx) {
+    let energy_per_train = get_energy_per_train(gym_idx);
+    let total_energy_req = gym_exp[gym_idx];
+    return Math.ceil(total_energy_req / energy_per_train); 
+}
+
+export function single_train_gains(stats_name, input_gym_name, current_stats, current_happy, current_bonus)
 {
     let gym_idx = find_gym_idx(input_gym_name);
-    if (gym_idx == gym_name.length){
+    if (gym_idx == gym_name_list.length){
         console.log("Invalid gym name input");
         return NaN;
     }
@@ -139,15 +166,8 @@ function single_train_gains(stats_name, input_gym_name, current_stats, current_h
     let gym_dots = all_gyms_dots[gym_idx][stats_idx];
     
     // D3
-    let energy_per_train = 0;
-    if (gym_idx < LIGHT_IDX) {
-        energy_per_train = 5;
-    } else if (gym_idx < HEAVY_IDX) {
-        energy_per_train = 10;
-    } else {
-        energy_per_train = special_energy_per_train_list[gym_idx - HEAVY_IDX];
-    }
-
+    let energy_per_train = get_energy_per_train(gym_idx);
+    
     current_stats = current_stats < SOFT_CAP ? current_stats : soft_cap(current_stats);
 
     let A = A_list[stats_idx], B = B_list[stats_idx];
@@ -159,29 +179,3 @@ function single_train_gains(stats_name, input_gym_name, current_stats, current_h
     return gains;
 }
 
-var initial_stats = [0, 0, 0, 0];
-var start_gym = "Premier Fitness";
-var stop_gym = "George's";
-var exercise_chain = new Array(HEAVY_IDX).fill("def");
-
-function fill_all_same(stats_name) {
-    exercise_chain = new Array();
-    for (let i = 0; i < HEAVY_IDX; i++){
-        exercise_chain.push(stats_name);
-    }
-}
-
-function push_attr(stats_name) {
-    exercise_chain.push(stats_name);
-}
-
-function clear_attr() {
-    exercise_chain = new Array();
-}
-
-function validation_range() {
-    start_idx = find_gym_idx(start_gym);
-    stop_idx = find_gym_idx(stop_gym);
-
-    return (stop_idx - start_idx + 1) == exercise_chain.length;
-}
