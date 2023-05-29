@@ -85,14 +85,23 @@ export const gym_exp = [
 
 export const stats_idx_map = {"str":STR, "def":DEF, "spd":SPD, "dex":DEX};
 
-export function find_greedy_stats (gym_idx, stats) {
+export function find_greedy_stats (gym_idx, stats, str_spd) {
     let dots = all_gyms_dots[gym_idx];
-    let pairs = [
-        [dots[STR], stats[STR], "str"],
-        [dots[DEF], stats[DEF], "def"],
-        [dots[SPD], stats[SPD], "spd"],
-        [dots[DEX], stats[DEX], "dex"]
-    ];
+    var pairs;
+    if (str_spd) {
+        pairs = [
+            [dots[STR], stats[STR], "str"],
+            [dots[SPD], stats[SPD], "spd"],
+        ];
+    }
+    else {
+        pairs = [
+            [dots[STR], stats[STR], "str"],
+            [dots[DEF], stats[DEF], "def"],
+            [dots[SPD], stats[SPD], "spd"],
+            [dots[DEX], stats[DEX], "dex"]
+        ];
+    } 
     pairs.sort((b, a) => {
         if (a[0] === b[0]) {
             return a[1] - b[1];
