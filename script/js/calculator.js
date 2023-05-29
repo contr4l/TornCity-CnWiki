@@ -47,7 +47,7 @@ var special_energy_per_train_list = [
     25, 25, 50, 50, 50, 50, 25, 10
 ]
 
-var STR = 0, DEF = 1, SPD = 2, DEX = 3;
+export var STR = 0, DEF = 1, SPD = 2, DEX = 3;
 var SOFT_CAP = 50000000;
 var LIGHT_IDX  = light_dots.length;
 var MIDDLE_IDX = LIGHT_IDX + middle_dots.length;
@@ -148,7 +148,7 @@ function valdr_formula(C3, D3, K3, H3, G3, A, B)
 
 /*************** 以下为对外提供函数接口 ****************/ 
 export function find_gym_idx(input_gym_name)
-{
+{   
     let gym_idx = 0;
     for (; gym_idx < gym_name_list.length; gym_idx++)
     {
@@ -156,6 +156,11 @@ export function find_gym_idx(input_gym_name)
             break;
     }
     return gym_idx;
+}
+
+export function find_gym_dot(input_gym_name) {
+    let idx = find_gym_idx(input_gym_name);
+    return all_gyms_dots[idx];
 }
 
 export function get_energy_per_train(gym_idx) {

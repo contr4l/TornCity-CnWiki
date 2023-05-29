@@ -1,13 +1,13 @@
 import * as cal_func from "./calculator.js";
 
-function format_num(num){
-  if (num > 1e9){
+function format_num(num) {
+  if (num > 1e9) {
     return (num / 1e9).toFixed(2) + 'b';
   }
-  else if (num > 1e6){
+  else if (num > 1e6) {
     return (num / 1e6).toFixed(2) + 'm';
   }
-  else if (num > 1e3){
+  else if (num > 1e3) {
     return (num / 1e3).toFixed(2) + 'k';
   }
   else {
@@ -23,7 +23,7 @@ export class Exercise_Params {
   }
 
   reset_all_params() {
-    console.log("Reseting all params");
+    console.log("Resetting all params");
     this.initial_happiness = 5025;
     this.current_happiness = 5025;
 
@@ -40,6 +40,7 @@ export class Exercise_Params {
     this.current_gym_limit = 0;
 
     this.current_stats = [0, 0, 0, 0];
+    this.stats_progress = [this.current_stats];
     this.exercise_chain = new Array(["str"]);
     this.exercise_idx = 0;
 
@@ -80,10 +81,10 @@ Exercise_Params.prototype.clear_attr = function () {
 };
 
 Exercise_Params.prototype.last_attr = function () {
-    if (this.exercise_chain.length === 0)
-        return "str";
+  if (this.exercise_chain.length === 0)
+    return "str";
 
-    return this.exercise_chain[this.exercise_chain.length - 1]
+  return this.exercise_chain[this.exercise_chain.length - 1]
 };
 
 Exercise_Params.prototype.validation_range = function () {
@@ -150,6 +151,7 @@ Exercise_Params.prototype.strspd_greedy_update = function (
 Exercise_Params.prototype.finish_train = function (gym_idx) {
   this.current_gym_progress = cal_func.gym_exp[gym_idx];
   this.current_gym_limit = cal_func.gym_exp[gym_idx];
+  this.stats_progress.push(this.current_stats.slice());
 };
 
 // process_1: using the same happiness for the whole time
@@ -158,11 +160,7 @@ Exercise_Params.prototype.iter_process = function () {
 
   while (!this.should_stop_iter()) {
     // Each iteration will finish one gym
-    // this.update(gym_idx, this.exercise_idx);
     this.update_callback(gym_idx, this.exercise_idx);
-    // console.log(
-    //   `current gym change to ${this.current_gym_name}, focus changed to ${this.current_focus}`
-    // );
 
     let train_times = cal_func.get_total_train_times(gym_idx);
     let stats_idx = cal_func.stats_idx_map[this.current_focus];
@@ -185,29 +183,145 @@ Exercise_Params.prototype.iter_process = function () {
     // hit the stop condition
     this.finish_train(gym_idx);
     gym_idx += 1;
+    this.exercise_idx += 1;
   }
   console.log("train order is ", this.exercise_chain);
 };
 
-Exercise_Params.prototype.render_result = function () {
-  console.log(`after exercise from ${this.start_gym_name} to ${
-    this.stop_gym_name
-  },\
-      \nyour stats is \
-      \nstr = ${format_num(this.current_stats[0])}, \
-      \ndef = ${format_num(this.current_stats[1])}, \
-      \nspd = ${format_num(this.current_stats[2])}, \
-      \ndex = ${format_num(this.current_stats[3])}`);
+function pathTo(ctx, xStart, yStart, xStep, yStep, x, y, move=true) {
+  if (move)
+    ctx.moveTo(xStart + x*xStep, yStart - y*yStep);
+  else
+    ctx.lineTo(xStart + x*xStep, yStart - y*yStep);
+}
 
+function drawLine(ctx, xStart, yStart, xStep, yStep, x1, y1, x2, y2, color) {
+  ctx.strokeStyle = color;
+  ctx.beginPath();
+  pathTo(ctx, xStart, yStart, xStep, yStep, x1, y1);
+  pathTo(ctx, xStart, yStart, xStep, yStep, x2, y2, false);
+  ctx.stroke();
+}
+
+function resize_canvas(canvas, ctx) {
+  let dpr = window.devicePixelRatio; // 假设dpr为2
+  let { width: cssWidth, height: cssHeight } = canvas.getBoundingClientRect();
+  canvas.width = dpr * cssWidth;
+  canvas.height = dpr * cssHeight;
+  // ctx.scale(dpr,dpr);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, coef){
+  const xMargin = Math.floor(canvas.width * coef);
+  const yMargin = Math.floor(canvas.height * coef);
+  const xStep = (canvas.width - 2 * xMargin) / (xMax - xMin);
+  const yStep = (canvas.height - 2 * yMargin) / (yMax - yMin);
+  const xStart = xMargin;
+  const yStart = canvas.height - yMargin;
+  ctx.strokeStyle = "black";
+  ctx.beginPath();
+  ctx.moveTo(xMargin, yMargin);
+  ctx.lineTo(xMargin, canvas.height - yMargin);
+  ctx.lineTo(canvas.width - xMargin, canvas.height - yMargin);
+  ctx.lineWidth = 10;
+  ctx.stroke();
+  return [xStep, yStep, xStart, yStart];
+}
+
+Exercise_Params.prototype.render_result = function () {
+  // console.log(`after exercise from ${this.start_gym_name} to ${this.stop_gym_name
+  //   },\
+  //     \nyour stats is \
+  //     \nstr = ${format_num(this.current_stats[0])}, \
+  //     \ndef = ${format_num(this.current_stats[1])}, \
+  //     \nspd = ${format_num(this.current_stats[2])}, \
+  //     \ndex = ${format_num(this.current_stats[3])}`);
+
+
+  let self = this;
+  (function fill_result_table() {
     let str_result = document.getElementById("str_label");
     let def_result = document.getElementById("def_label");
     let spd_result = document.getElementById("spd_label");
     let dex_result = document.getElementById("dex_label");
 
-    str_result.textContent = format_num(this.current_stats[0]);
-    def_result.textContent = format_num(this.current_stats[1]);
-    spd_result.textContent = format_num(this.current_stats[2]);
-    dex_result.textContent = format_num(this.current_stats[3]);
+    str_result.textContent = format_num(self.current_stats[0]);
+    def_result.textContent = format_num(self.current_stats[1]);
+    spd_result.textContent = format_num(self.current_stats[2]);
+    dex_result.textContent = format_num(self.current_stats[3]);
+  })();
+
+  (function render_canvas() {
+    let canvas = document.getElementById("stats_change_graph");
+    let ctx = canvas.getContext("2d");
+    resize_canvas(canvas,ctx);
+
+    let start_idx = cal_func.find_gym_idx(self.start_gym_name);
+    let stop_idx = cal_func.find_gym_idx(self.stop_gym_name);
+    
+    // draw axis
+    const xMargin = Math.floor(canvas.width * 0.075);
+    const yMargin = Math.floor(canvas.height * 0.075);
+    const xMin = 0, xMax = stop_idx - start_idx + 1;
+    const yMin = 0, yMax = Math.max(...self.current_stats);
+    let [xStep, yStep, xStart, yStart] = drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, 0.075);
+
+    ctx.lineWidth = 5;
+    for (let i = xMin; i <= xMax; i++) {
+      drawLine(ctx, xStart, yStart, xStep, yStep, i-xMin, 0, i-xMin, yMax / 50, "black");
+      drawLine(ctx, xStart, yStart, xStep, yStep, 0, yMax / (xMax - xMin + 1) * (i - xMin), xMax / 90, yMax / (xMax - xMin + 1) * (i - xMin), "black");
+    }
+
+    // draw four lines
+    let x = new Array();
+    let y = new Array();
+    for (let i = start_idx; i <= stop_idx + 1; i++) {
+      x.push(i - start_idx);
+      y.push(self.stats_progress[i - start_idx].slice());
+    }
+
+    let color = ["red", "green", "yellow", "purple"];
+    for (let i = cal_func.STR; i <= cal_func.DEX; i++){
+      ctx.strokeStyle = color[i];
+      ctx.beginPath();
+      pathTo(ctx, xStart, yStart, xStep, yStep, x[0], y[0][i]);
+      for (let j = 1; j < x.length; j++) {
+        pathTo(ctx, xStart, yStart, xStep, yStep, x[j], y[j][i], false);
+      }
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.save();
+    }
+
+    // draw legend
+    const legend_fontsize = 32;
+    let legend_y_start = yMargin * 2;
+    ctx.font = "32px Arial";
+    ctx.fillStyle = "red";
+    ctx.fillText("Str", canvas.width / 2, legend_y_start);
+    ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
+    
+    ctx.fillStyle = "green";
+    legend_y_start += yMargin;
+    ctx.fillText("Def", canvas.width / 2, legend_y_start);
+    ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
+
+    ctx.fillStyle = "yellow";
+    legend_y_start += yMargin;
+    ctx.fillText("Spd", canvas.width / 2, legend_y_start);
+    ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
+    
+    ctx.fillStyle = "purple";
+    legend_y_start += yMargin;
+    ctx.fillText("Dex", canvas.width / 2, legend_y_start);
+    ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
+    
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(canvas.width / 2 - 32, 2*yMargin - 40, 320, legend_y_start - yMargin);
+
+})();
 };
 
 var PRESET_SELECTOR_USER_DEFINED = 0;
@@ -215,6 +329,7 @@ var PRESET_SELECTOR_GREEDY_OVERALL = 1;
 var PRESET_SELECTOR_GREEDY_STR_SPD = 2;
 Exercise_Params.prototype.read_preset = function () {
   let element = document.getElementById("preset_selector");
+
   if (element.selectedIndex == PRESET_SELECTOR_USER_DEFINED) {
     this.update_callback = this.update;
     return false;
@@ -230,12 +345,14 @@ Exercise_Params.prototype.read_preset = function () {
 
 Exercise_Params.prototype.get_exercise_chain = function () {
   this.clear_attr();
+  var alert_ = false;
   document.querySelectorAll(".attr_select").forEach((element) => {
     let idx = element.selectedIndex;
     if (element.options[idx].text == "same as above") {
       this.push_attr(this.last_attr());
-    } else if (element.options[idx].text == "PRESET") {
-      alert("PRESET not compatiable with User Defined, the result would be incorrect");
+    } else if (element.options[idx].text == "PRESET" && !alert_) {
+      alert_ = true;
+      alert("PRESET not compatible with User Defined, the result would be incorrect");
       return;
     }
     else {
@@ -262,6 +379,7 @@ Exercise_Params.prototype.get_initial_stats = function () {
   this.current_stats[1] = Number(document.getElementById('def_input').value);
   this.current_stats[2] = Number(document.getElementById('spd_input').value);
   this.current_stats[3] = Number(document.getElementById('dex_input').value);
+  this.stats_progress = [this.current_stats.slice()];
 };
 
 function parse_perks(percentage) {
@@ -299,3 +417,40 @@ Exercise_Params.prototype.read_params = function () {
   // Step 4: get bonus perks
   this.get_other_perks();
 };
+
+/**
+ *
+ * @param {NamedNodeMap} dom
+ */
+Exercise_Params.prototype.show_gym_dots = function (dom) {
+  let gym_name = dom.parentNode.previousElementSibling.textContent;
+  let gym_dots = cal_func.find_gym_dot(gym_name);
+  console.log("gym is ", gym_name, "dots is ", gym_dots);
+
+  let canvas = document.getElementById("gym_dots");
+  var ctx = canvas.getContext("2d");
+  resize_canvas(canvas, ctx);
+
+
+  // draw axis
+  const xMin = 0, xMax = 5;
+  const yMin = 0, yMax = Math.max(...gym_dots.filter(x => !isNaN(x)));
+  let [xStep, yStep, xStart, yStart] = drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, 0.1);
+
+  ctx.font = "20px Arial Bold";
+  ctx.fillStyle = "black";
+  ctx.fillText(gym_name, canvas.width / 2 - 7.5 * gym_name.length, yStep * 0.7);
+
+  let color = ["red", "green", "yellow", "purple"];
+  let text = ["str", "def", "spd", "dex"];
+  for (let i = cal_func.STR; i <= cal_func.DEX; i ++)
+  {
+    if (!isNaN(gym_dots[i])){
+      ctx.fillStyle = color[i];
+      ctx.fillRect(xStart + (i + 0.5) * xStep, yStart - 0.1 * yStep, 0.6 * xStep, -gym_dots[i] * yStep * 0.8);
+    }
+    ctx.fillStyle = "black";
+    ctx.fillText(text[i], xStart + (i + 0.75) * xStep, yStart + 24);
+    ctx.fillText(gym_dots[i].toFixed(1), xStart + (i + 0.75) * xStep, yStart -gym_dots[i] * yStep * 0.85);
+  }
+}
