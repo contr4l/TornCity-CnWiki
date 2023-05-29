@@ -79,12 +79,29 @@ export const gym_name_list = [
 export const gym_exp = [
     200, 500, 1000, 2000, 2750, 3000, 3500, 4000, // light
     6000, 7000, 8000, 11000, 12420, 18000, 18100, 24140, // middle
-    31260, 36610, 46640, 56520, 67775, 84535, 106305, 200000, // heavy
+    31260, 36610, 46640, 56520, 67775, 84535, 106305, 120000, // heavy
     NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN // special
 ]
 
 export const stats_idx_map = {"str":STR, "def":DEF, "spd":SPD, "dex":DEX};
 
+export function find_greedy_stats (gym_idx, stats) {
+    let dots = all_gyms_dots[gym_idx];
+    let pairs = [
+        [dots[STR], stats[STR], "str"],
+        [dots[DEF], stats[DEF], "def"],
+        [dots[SPD], stats[SPD], "spd"],
+        [dots[DEX], stats[DEX], "dex"]
+    ];
+    pairs.sort((b, a) => {
+        if (a[0] === b[0]) {
+            return a[1] - b[1];
+          } else {
+            return a[0] - b[0];
+          }
+    });
+    return pairs[0][2];
+}
 
 function new_round(n, m) {
     // round n to m decimals
@@ -164,7 +181,13 @@ export function single_train_gains(stats_name, input_gym_name, current_stats, cu
     // Initial co-efficiency
     // C3
     let gym_dots = all_gyms_dots[gym_idx][stats_idx];
-    
+    if (isNaN(gym_dots))
+    {
+        // current gym doesn't support this stats
+        return 0;
+    }
+
+
     // D3
     let energy_per_train = get_energy_per_train(gym_idx);
     

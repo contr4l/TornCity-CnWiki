@@ -1,10 +1,746 @@
 <head>
+    <style>
+        select {
+            width: 90%;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        option {
+            text-align: center;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        th,td {
+            font-size: 8;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            text-align: center;
+        }
+
+        input {
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin-top: 0.5px;
+            font-size: 8;
+            vertical-align: middle;
+        }
+
+        label {
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 8;
+            vertical-align: middle;
+        }
+
+        span {
+            display: inline-block;
+            width: 564px;
+            background-color: #ddd;
+        }
+    </style>
 
 </head>
 
 <body>
-<button id="start_btn"> start simulation</button>
-<button id="reset_btn"> rest simulation params1</button>
+
+<div style="position: relative; display: flex; width: 100%; height: 100%;">
+    
+    <div id="left" style="width:35%; float:left; padding:20px; padding-right: 5px; padding-bottom: 0px;">
+        <div style="padding-bottom: 3px;">
+            <table border="1" cellspacing="0" style="width: 100%; ">
+                    <tr >
+                        <th width="37%">Gym Name</th>
+                        <th width="37%">To Train</th>
+                        <th width="26%" colspan="2">Breakpoint</th>
+                </tr>
+        
+                <tr>
+                    <td colspan="4" style="font-size:medium;">
+                        Light Weight Gym
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Premier Fitness</td>
+                    <td>
+                        <select>
+                            <option selected>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Average Joes</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Woody's Workout</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Beach Bods</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Sliver Gym</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Pour Femme</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Davies Den</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Global Gym</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Average Joes</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td colspan="4" style="font-size:medium;">
+                        Middle Weight Gym
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Knuckle Heads</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Pioneer Fitness</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Anabolic Anomalies</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Core</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Racing Fitness</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Complete Cardio</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Legs, Bums and Tums</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Deep Burn</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td colspan="4" style="font-size:medium;">
+                        Heavy Weight Gym
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Apollo Gym</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Gun Shop</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Force Training</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Cha Cha's</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Atlas</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>Last Round</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>The Edge</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>George's</td>
+                    <td>
+                        <select>
+                            <option>str</option>
+                            <option>def</option>
+                            <option>spd</option>
+                            <option>dex</option>
+                            <option selected>same as above</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="radio" name="start_opt" value="start" id="start">
+                        <label for="start">Start</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="stop_opt" value="stop" id="stop">
+                        <label for="stop">Stop</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height:4%;">
+            <table style="background-color: #fff; width: 100%;">
+                <tr>
+                    <th width="50%">
+                        <button id="start_btn"> start simulation</button>
+                    </th>
+                    <th width="50%">
+                        <button id="reset_btn"> rest gym params</button>
+                    </th>
+                </tr>
+                    
+            </table>
+        </div>
+
+        <div style="height:15%;">
+            <canvas id="gym_dots" style="width: 100%; height: 100%; background-color: #eeeeee;"></canvas>
+        </div>
+    </div>
+        
+    <div style="float:left; width:65%; padding: 20px; padding-left: 5px;">
+        <div id="right-up" style="background-color: bisque; display: flex; height:30%; width:100%; padding: 5px;">
+            <div id="right-up-left" style="float:left; width:40%; padding: 5px">
+                <table id="perks_set" border="1" style="table-layout: fixed;">
+                    <colgroup>
+                        <col width=50%></col>
+                        <col width=50%></col>
+                    </colgroup>
+                    <tr>
+                        <th colspan="2" style="font-size: 12; text-align: center;">
+                            Other Params
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td>Happiness</td>
+                        <td>
+                            <input id="happiness_input" type="number" style="width:80%"></input>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2" style="font-size: 12; font-weight: bold;">
+                            Current Stats
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Strength</td>
+                        <td>
+                            <input id="str_input" type="number" style="width:80%" ></input>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Defense</td>
+                        <td>
+                            <input id="def_input" type="number" style="width:80%" ></input>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Speed</td>
+                        <td>
+                            <input id="spd_input" type="number" style="width:80%" ></input>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Dexterity</td>
+                        <td>
+                            <input id="dex_input" type="number" style="width:80%" ></input>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" style="font-size: 12; font-weight: bold;">
+                            Other Perks
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Faction perks(%)</td>
+                        <td>
+                            <input id="happiness_input" type="number" style="width:80%" ></input>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Property perks(%)</td>
+                        <td>
+                            <input id="happiness_input" type="number" style="width:80%" ></input>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            
+            <div id="right-up-right" style="float:left; width: 60%; height: 99%; padding: 5px;">
+                <table id="perks_set" border="1" style="table-layout: fixed; width:70%; height:100%; padding-bottom: 0px;">
+                    <tr>
+                        <th colspan="2" style="font-size: 24; font-weight: bold; text-align: center;">
+                            Result Shows
+                        </th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Strength</td>
+                        <td>
+                            <label id="str_label" type="number" style="width:80%" ></label>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Defense</td>
+                        <td>
+                            <label id="def_label" type="number" style="width:80%" ></label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Speed</td>
+                        <td>
+                            <label id="spd_label" type="number" style="width:80%" ></label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Dexterity</td>
+                        <td>
+                            <label id="dex_label" type="number" style="width:80%" ></label>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <div id="right-down" style="width:100%; height: 70%; background-color: #abcdef; padding: 5px;">
+            <canvas id="stats_change_graph" style="width: 100%;"></canvas>
+        </div>
+
+    </div>
+</div>
+
 </body>
 
 <script type="module" src="./gym_simulator.js"></script>

@@ -6,18 +6,18 @@ class Exercise_Params {
   }
 
   reset_all_params() {
-    console.log("Initializeing");
+    console.log("Initializing");
     this.initial_happiness = 5025;
     this.current_happiness = 5025;
 
     this.current_bonus = 1.0;
 
     this.start_gym_name = "Premier Fitness";
-    this.stop_gym_name = "Premier Fitness";
-    // this.stop_gym_name = "George's";
+    // this.stop_gym_name = "Premier Fitness";
+    this.stop_gym_name = "George's";
     this.current_gym_name = "Premier Fitness";
 
-    this.current_focus = "str";
+    this.current_focus = "def";
 
     this.current_gym_progress = 0;
     this.current_gym_limit = 0;
@@ -32,6 +32,10 @@ class Exercise_Params {
                  \nstop  gym is ${this.stop_gym_name} \
                  \ncurrent stats is ${this.current_stats}\
                  \ncurrent todo  is ${this.current_focus}`);
+  }
+
+  stats_info() {
+    return this.current_stats[0].toFixed(2) + "," + this.current_stats[1].toFixed(2) + "," + this.current_stats[2].toFixed(2) + "," + this.current_stats[3].toFixed(2)
   }
 }
 
@@ -82,24 +86,29 @@ Exercise_Params.prototype.update = function (gym_idx, exercise_idx) {
   console.log(`current gym change to ${this.current_gym_name}, focus changed to ${this.current_focus}`);
 };
 
+Exercise_Params.prototype.greedy_update = function (gym_idx, exercise_idx) {
+  this.current_gym_name = cal_func.gym_name_list[gym_idx];
+  this.current_focus = cal_func.find_greedy_stats(gym_idx, this.current_stats);
+}
+
 Exercise_Params.prototype.finish_train = function (gym_idx) {
   this.current_gym_progress = cal_func.gym_exp[gym_idx];
   this.current_gym_limit = cal_func.gym_exp[gym_idx];
 };
 
 // process_1: using the same happiness for the whole time
-Exercise_Params.prototype.iter_process_1 = function () {
+Exercise_Params.prototype.iter_process_1 = function (update_callback) {
   let gym_idx = cal_func.find_gym_idx(this.current_gym_name);
 
   while (!this.should_stop_iter()) {
     // Each iteration will finish one gym
-    this.update(gym_idx, this.exercise_idx);
+    // this.update(gym_idx, this.exercise_idx);
+    update_callback(gym_idx, this.exercise_idx);
 
     let train_times = cal_func.get_total_train_times(gym_idx);
     let stats_idx = cal_func.stats_idx_map[this.current_focus];
 
-    console.log(`focus on ${this.current_focus}, stats_idx is ${stats_idx}`);
-    console.log(`train_times: ${train_times}`);
+    // console.log(`train_times: ${train_times}`);
     for (let i = 0; i < train_times; i++) {
       this.current_stats[stats_idx] += cal_func.single_train_gains(
         this.current_focus,
@@ -109,9 +118,9 @@ Exercise_Params.prototype.iter_process_1 = function () {
         this.current_bonus
       );
     }
-    console.log(this.current_focus, this.current_gym_name, this.current_stats[stats_idx], this.current_happiness, this.current_bonus);
+    // console.log(this.current_focus, this.current_gym_name, this.current_stats[stats_idx].toFixed(2), this.current_happiness, this.current_bonus);
 
-    console.log(`finish ${this.current_gym_name}, stats changed to ${this.current_stats}`);
+    console.log(`finish ${this.current_gym_name}, stats changed to ${this.stats_info()}`);
     // hit the stop condition
     this.finish_train(gym_idx);
 
@@ -121,11 +130,11 @@ Exercise_Params.prototype.iter_process_1 = function () {
 
 Exercise_Params.prototype.render_result = function () {
   console.log(`after exercise from ${this.start_gym_name} to ${this.stop_gym_name},\
-    your stats is \
-    str = ${this.current_stats[0]}, \
-    def = ${this.current_stats[1]}, \
-    spd = ${this.current_stats[2]}, \
-    dex = ${this.current_stats[3]}`);
+    \nyour stats is \
+    \nstr = ${this.current_stats[0].toFixed(2)}, \
+    \ndef = ${this.current_stats[1].toFixed(2)}, \
+    \nspd = ${this.current_stats[2].toFixed(2)}, \
+    \ndex = ${this.current_stats[3].toFixed(2)}`);
 };
 
 Exercise_Params.prototype.read_params = function () {
@@ -136,7 +145,7 @@ Exercise_Params.prototype.read_params = function () {
 function simulation_process(handle) {
   handle.read_params();
   handle.initialize();
-  handle.iter_process_1();
+  handle.iter_process_1(handle.greedy_update.bind(handle));
   handle.render_result();
 }
 
