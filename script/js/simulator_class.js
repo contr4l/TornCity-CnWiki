@@ -1,4 +1,5 @@
 import * as cal_func from "./calculator.js";
+import * as cnct from "./fb_connect.js"
 
 function format_num(num) {
   if (num > 1e9) {
@@ -229,6 +230,135 @@ function drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, coef){
   return [xStep, yStep, xStart, yStart];
 }
 
+var PRESET_SELECTOR_USER_DEFINED = 0;
+var PRESET_SELECTOR_GREEDY_OVERALL = 1;
+var PRESET_SELECTOR_GREEDY_STR_SPD = 2;
+Exercise_Params.prototype.read_preset = function () {
+  let element = cnct.get_preset_select();
+
+  if (element.selectedIndex == PRESET_SELECTOR_USER_DEFINED) {
+    this.update_callback = this.update;
+    return false;
+  } else if (element.selectedIndex == PRESET_SELECTOR_GREEDY_OVERALL) {
+    console.log("PRESET_SELECTOR_GREEDY_OVERALL is selected");
+    this.update_callback = this.overall_greedy_update;
+  } else if (element.selectedIndex == PRESET_SELECTOR_GREEDY_STR_SPD) {
+    console.log("PRESET_SELECTOR_GREEDY_STR_SPD is selected");
+    this.update_callback = this.strspd_greedy_update;
+  }
+  return true;
+};
+
+Exercise_Params.prototype.get_exercise_chain = function () {
+  this.clear_attr();
+  var alert_ = false;
+  cnct.get_all_attr_select().forEach((element) => {
+    let idx = element.selectedIndex;
+    if (element.options[idx].text == "same as above") {
+      this.push_attr(this.last_attr());
+    } else if (element.options[idx].text == "PRESET" && !alert_) {
+      alert_ = true;
+      alert("PRESET not compatible with User Defined, the result would be incorrect");
+      return;
+    }
+    else {
+      this.push_attr(element.options[idx].text);
+    }
+  });
+  // console.log(this.exercise_chain);
+};
+
+Exercise_Params.prototype.get_start_stop_gym = function () {
+  cnct.get_all_gym_row().forEach((element) => {
+    // console.log("check", element.querySelector('td').textContent);
+    if (cnct.get_start_opt(element).checked) {
+      this.start_gym_name = element.querySelector("td").textContent;
+    }
+    if (cnct.get_stop_opt(element).checked) {
+      this.stop_gym_name = element.querySelector("td").textContent;
+    }
+  });
+};
+
+Exercise_Params.prototype.get_initial_stats = function () {
+  this.current_stats[0] = Number(document.getElementById('str_input').value);
+  this.current_stats[1] = Number(document.getElementById('def_input').value);
+  this.current_stats[2] = Number(document.getElementById('spd_input').value);
+  this.current_stats[3] = Number(document.getElementById('dex_input').value);
+  this.stats_progress = [this.current_stats.slice()];
+};
+
+function parse_perks(percentage) {
+  if (isNaN(percentage) || Number(faction_perks) == 0) {
+    return 1;
+  }
+  return 1 + Number(percentage / 100);
+}
+
+Exercise_Params.prototype.get_other_perks = function () {
+  let [faction_perks, property_perks] = cnct.get_other_perks();
+  console.log("faction_perks = " + faction_perks, "property_perks = " + property_perks);
+
+  this.current_bonus *= parse_perks(faction_perks);
+  this.current_bonus *= parse_perks(property_perks);
+};
+
+Exercise_Params.prototype.read_params = function () {
+  // when "start" button is clicked, read all params set from webpage
+  // and start simulation
+
+  // Step 1: get exercise chain
+  if (!this.read_preset()) {
+    this.get_exercise_chain();
+  }
+
+  // Step 2: get start and stop gym name
+  this.get_start_stop_gym();
+
+  // Step 3: get initial stats
+  this.get_initial_stats();
+
+  // Step 4: get bonus perks
+  this.get_other_perks();
+};
+
+/**
+ *
+ * @param {NamedNodeMap} dom
+ */
+Exercise_Params.prototype.show_gym_dots = function (dom) {
+  let gym_name = dom.parentNode.previousElementSibling.textContent;
+  let gym_dots = cal_func.find_gym_dot(gym_name);
+  console.log("gym is ", gym_name, "dots is ", gym_dots);
+
+  let canvas = cnct.get_gym_dots();
+  var ctx = canvas.getContext("2d");
+  resize_canvas(canvas, ctx);
+
+
+  // draw axis
+  const xMin = 0, xMax = 5;
+  const yMin = 0, yMax = Math.max(...gym_dots.filter(x => !isNaN(x)));
+  let [xStep, yStep, xStart, yStart] = drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, 0.1);
+
+  ctx.font = "20px Arial Bold";
+  ctx.fillStyle = "black";
+  ctx.fillText(gym_name, canvas.width / 2 - 7.5 * gym_name.length, yStep * 0.7);
+
+  let color = ["red", "green", "yellow", "purple"];
+  let text = ["str", "def", "spd", "dex"];
+  for (let i = cal_func.STR; i <= cal_func.DEX; i ++)
+  {
+    if (!isNaN(gym_dots[i])){
+      ctx.fillStyle = color[i];
+      ctx.fillRect(xStart + (i + 0.5) * xStep, yStart - 0.1 * yStep, 0.6 * xStep, -gym_dots[i] * yStep * 0.8);
+    }
+    ctx.fillStyle = "black";
+    ctx.fillText(text[i], xStart + (i + 0.75) * xStep, yStart + 24);
+    ctx.fillText(gym_dots[i].toFixed(1), xStart + (i + 0.75) * xStep, yStart -gym_dots[i] * yStep * 0.85);
+  }
+}
+
 Exercise_Params.prototype.render_result = function () {
   // console.log(`after exercise from ${this.start_gym_name} to ${this.stop_gym_name
   //   },\
@@ -241,11 +371,7 @@ Exercise_Params.prototype.render_result = function () {
 
   let self = this;
   (function fill_result_table() {
-    let str_result = document.getElementById("str_label");
-    let def_result = document.getElementById("def_label");
-    let spd_result = document.getElementById("spd_label");
-    let dex_result = document.getElementById("dex_label");
-
+    let [str_result, def_result, spd_result, dex_result] = cnct.get_result_label();
     str_result.textContent = format_num(self.current_stats[0]);
     def_result.textContent = format_num(self.current_stats[1]);
     spd_result.textContent = format_num(self.current_stats[2]);
@@ -253,7 +379,7 @@ Exercise_Params.prototype.render_result = function () {
   })();
 
   (function render_canvas() {
-    let canvas = document.getElementById("stats_change_graph");
+    let canvas = cnct.get_stats_canvas()
     let ctx = canvas.getContext("2d");
     resize_canvas(canvas,ctx);
 
@@ -317,140 +443,9 @@ Exercise_Params.prototype.render_result = function () {
     ctx.fillText("Dex", canvas.width / 2, legend_y_start);
     ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
     
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(canvas.width / 2 - 32, 2*yMargin - 40, 320, legend_y_start - yMargin);
+    // ctx.strokeStyle = "black";
+    // ctx.lineWidth = 3;
+    // ctx.strokeRect(canvas.width / 2 - 32, 2*yMargin - 40, 320, legend_y_start - yMargin);
 
 })();
 };
-
-var PRESET_SELECTOR_USER_DEFINED = 0;
-var PRESET_SELECTOR_GREEDY_OVERALL = 1;
-var PRESET_SELECTOR_GREEDY_STR_SPD = 2;
-Exercise_Params.prototype.read_preset = function () {
-  let element = document.getElementById("preset_selector");
-
-  if (element.selectedIndex == PRESET_SELECTOR_USER_DEFINED) {
-    this.update_callback = this.update;
-    return false;
-  } else if (element.selectedIndex == PRESET_SELECTOR_GREEDY_OVERALL) {
-    console.log("PRESET_SELECTOR_GREEDY_OVERALL is selected");
-    this.update_callback = this.overall_greedy_update;
-  } else if (element.selectedIndex == PRESET_SELECTOR_GREEDY_STR_SPD) {
-    console.log("PRESET_SELECTOR_GREEDY_STR_SPD is selected");
-    this.update_callback = this.strspd_greedy_update;
-  }
-  return true;
-};
-
-Exercise_Params.prototype.get_exercise_chain = function () {
-  this.clear_attr();
-  var alert_ = false;
-  document.querySelectorAll(".attr_select").forEach((element) => {
-    let idx = element.selectedIndex;
-    if (element.options[idx].text == "same as above") {
-      this.push_attr(this.last_attr());
-    } else if (element.options[idx].text == "PRESET" && !alert_) {
-      alert_ = true;
-      alert("PRESET not compatible with User Defined, the result would be incorrect");
-      return;
-    }
-    else {
-      this.push_attr(element.options[idx].text);
-    }
-  });
-  // console.log(this.exercise_chain);
-};
-
-Exercise_Params.prototype.get_start_stop_gym = function () {
-  document.querySelectorAll(".gym_row").forEach((element) => {
-    // console.log("check", element.querySelector('td').textContent);
-    if (element.querySelector('input[name="start_opt"').checked) {
-      this.start_gym_name = element.querySelector("td").textContent;
-    }
-    if (element.querySelector('input[name="stop_opt"').checked) {
-      this.stop_gym_name = element.querySelector("td").textContent;
-    }
-  });
-};
-
-Exercise_Params.prototype.get_initial_stats = function () {
-  this.current_stats[0] = Number(document.getElementById('str_input').value);
-  this.current_stats[1] = Number(document.getElementById('def_input').value);
-  this.current_stats[2] = Number(document.getElementById('spd_input').value);
-  this.current_stats[3] = Number(document.getElementById('dex_input').value);
-  this.stats_progress = [this.current_stats.slice()];
-};
-
-function parse_perks(percentage) {
-  if (isNaN(percentage) || Number(faction_perks) == 0) {
-    return 1;
-  }
-  return 1 + Number(percentage / 100);
-}
-
-Exercise_Params.prototype.get_other_perks = function () {
-  let faction_perks = document.getElementById('faction_perks').value;
-  let property_perks = document.getElementById('property_perks').value;
-
-  console.log("faction_perks = " + faction_perks, "property_perks = " + property_perks);
-
-  this.current_bonus *= parse_perks(faction_perks);
-  this.current_bonus *= parse_perks(property_perks);
-};
-
-Exercise_Params.prototype.read_params = function () {
-  // when "start" button is clicked, read all params set from webpage
-  // and start simulation
-
-  // Step 1: get exercise chain
-  if (!this.read_preset()) {
-    this.get_exercise_chain();
-  }
-
-  // Step 2: get start and stop gym name
-  this.get_start_stop_gym();
-
-  // Step 3: get initial stats
-  this.get_initial_stats();
-
-  // Step 4: get bonus perks
-  this.get_other_perks();
-};
-
-/**
- *
- * @param {NamedNodeMap} dom
- */
-Exercise_Params.prototype.show_gym_dots = function (dom) {
-  let gym_name = dom.parentNode.previousElementSibling.textContent;
-  let gym_dots = cal_func.find_gym_dot(gym_name);
-  console.log("gym is ", gym_name, "dots is ", gym_dots);
-
-  let canvas = document.getElementById("gym_dots");
-  var ctx = canvas.getContext("2d");
-  resize_canvas(canvas, ctx);
-
-
-  // draw axis
-  const xMin = 0, xMax = 5;
-  const yMin = 0, yMax = Math.max(...gym_dots.filter(x => !isNaN(x)));
-  let [xStep, yStep, xStart, yStart] = drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, 0.1);
-
-  ctx.font = "20px Arial Bold";
-  ctx.fillStyle = "black";
-  ctx.fillText(gym_name, canvas.width / 2 - 7.5 * gym_name.length, yStep * 0.7);
-
-  let color = ["red", "green", "yellow", "purple"];
-  let text = ["str", "def", "spd", "dex"];
-  for (let i = cal_func.STR; i <= cal_func.DEX; i ++)
-  {
-    if (!isNaN(gym_dots[i])){
-      ctx.fillStyle = color[i];
-      ctx.fillRect(xStart + (i + 0.5) * xStep, yStart - 0.1 * yStep, 0.6 * xStep, -gym_dots[i] * yStep * 0.8);
-    }
-    ctx.fillStyle = "black";
-    ctx.fillText(text[i], xStart + (i + 0.75) * xStep, yStart + 24);
-    ctx.fillText(gym_dots[i].toFixed(1), xStart + (i + 0.75) * xStep, yStart -gym_dots[i] * yStep * 0.85);
-  }
-}
