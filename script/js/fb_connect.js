@@ -57,3 +57,7 @@ export function get_other_perks() {
 export function get_gym_dots() {
     return document.getElementById("gym_dots");
 }
+
+export function get_all_stop_select() {
+    return document.querySelectorAll('input[name="stop_opt"');
+}

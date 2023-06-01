@@ -8,6 +8,9 @@
 - 在每个健身房中，`STR/DEF/SPD/DEX`表示在该阶段训练的属性，`Same As Above`表示和前一个健身房保持一致，`PRESET`仅用于使用预置策略（贪心策略等）自动选取
 - 当进行某个健身房的属性选择时，页面左下角会显示该健身房的四项锻炼加成
 - `Happiness`表示当前锻炼时的快乐值，目前的迭代策略是每次锻炼都使用此恒定快乐值
+- `Start Experience`表示第一个健身房已经消耗掉的Energy
+- `Final Experience`表示最后一个健身房预计要小号的Energy
+  - 注：当选中任意一个健身房作为Stop时，该健身房的升级所需Exp会自动填入该框中
 - `Initial Stats`表示开始迭代前的初始属性值
 - `Faction Perks`和`Property Perks`表示你的帮派和住房对锻炼的加成，通常分别是10%~14%以及2%(Private Island)
 - `Strategy`是预置的策略

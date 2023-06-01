@@ -672,6 +672,20 @@
                         </tr>
 
                         <tr>
+                            <td>Start Experience</td>
+                            <td>
+                                <input id="initial_progress" type="number" style="width:80%" value="0"></input>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Final Experience</td>
+                            <td>
+                                <input id="final_progress" type="number" style="width:80%" value="20000"></input>
+                            </td>
+                        </tr>
+
+                        <tr>
                             <td colspan="2" style="font-size: 12; font-weight: bold;">
                                 Initial Stats
                             </td>
@@ -817,7 +831,7 @@
     }
 
     function showMd(file, cb) {
-        const popupWindow = window.open("", "Popup", "width=600,height=600");
+        const popupWindow = window.open("", "Popup", "width=600,height=800");
         const xhr = new XMLHttpRequest();
         xhr.open('GET', file);
         xhr.onload = () => {
@@ -836,4 +850,6 @@
     function showDevPlan() {
         showMd("./progress.md", get_dev_plan);
     }
+
+    
 </script>

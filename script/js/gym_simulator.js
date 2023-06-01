@@ -46,10 +46,13 @@ function watch_preset(handle) {
   var presetOpt = cnct.get_preset_select();
 
   presetOpt.onchange = function () {
-    handle.get_start_stop_gym();
-    handle.get_initial_stats();
+    console.log(this);
     if (this.selectedIndex == sim.PRESET_SELECTOR_USER_DEFINED) {
-      return;
+      cnct.get_all_gym_row().forEach( element => {
+        cnct.get_attr_select(element).selectedIndex = 5;
+      });
+      let first = cnct.get_all_gym_row()[0];
+      cnct.get_attr_select(first).selectedIndex = 0;
     }
     else {
       cnct.get_all_gym_row().forEach( element => {
@@ -70,6 +73,14 @@ function watch_dots(handle) {
   });
 }
 
+function refresh_target_progress() {
+  cnct.get_all_stop_select().forEach( element => {
+    element.addEventListener("click", function() {
+      sim.Refresh_Target(this);
+    });
+  });
+}
+
 /**
  * 主函数
  */
@@ -78,4 +89,5 @@ function watch_dots(handle) {
   watch_btn(handle);
   watch_preset(handle);
   watch_dots(handle);
+  refresh_target_progress();
 })();

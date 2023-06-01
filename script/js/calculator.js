@@ -176,10 +176,9 @@ export function get_energy_per_train(gym_idx) {
     return energy_per_train;
 }
 
-export function get_total_train_times(gym_idx) {
+export function get_total_train_times(gym_idx, target_exp) {
     let energy_per_train = get_energy_per_train(gym_idx);
-    let total_energy_req = gym_exp[gym_idx];
-    return Math.ceil(total_energy_req / energy_per_train); 
+    return Math.ceil(target_exp / energy_per_train); 
 }
 
 export function single_train_gains(stats_name, input_gym_name, current_stats, current_happy, current_bonus)
