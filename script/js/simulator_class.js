@@ -42,7 +42,7 @@ export class Exercise_Params {
 
     this.current_stats = [0, 0, 0, 0];
     this.stats_progress = [this.current_stats];
-    this.exercise_chain = new Array(["str"]);
+    this.exercise_chain = new Array([]);
     this.exercise_idx = 0;
 
     this.update_callback = null;
@@ -111,22 +111,22 @@ Exercise_Params.prototype.should_stop_iter = function () {
 
 Exercise_Params.prototype.initialize = function () {
   this.current_gym_name = this.start_gym_name;
+  this.current_happiness = this.initial_happiness;
   this.current_focus = this.exercise_chain[0];
   this.current_gym_progress = 0;
+
 
   let gym_idx = cal_func.find_gym_idx(this.current_gym_name);
   this.current_gym_limit = cal_func.gym_exp[gym_idx];
 };
 
-Exercise_Params.prototype.update = function (gym_idx, exercise_idx) {
+Exercise_Params.prototype.update = function (gym_idx) {
   this.current_gym_name = cal_func.gym_name_list[gym_idx];
-  this.current_focus = this.exercise_chain[exercise_idx];
+  this.current_focus = this.exercise_chain[gym_idx];
 };
 
 Exercise_Params.prototype.overall_greedy_update = function (
-  gym_idx,
-  exercise_idx
-) {
+  gym_idx) {
   this.current_gym_name = cal_func.gym_name_list[gym_idx];
   this.current_focus = cal_func.find_greedy_stats(
     gym_idx,
@@ -137,9 +137,7 @@ Exercise_Params.prototype.overall_greedy_update = function (
 };
 
 Exercise_Params.prototype.strspd_greedy_update = function (
-  gym_idx,
-  exercise_idx
-) {
+  gym_idx) {
   this.current_gym_name = cal_func.gym_name_list[gym_idx];
   this.current_focus = cal_func.find_greedy_stats(
     gym_idx,
@@ -161,7 +159,7 @@ Exercise_Params.prototype.iter_process = function () {
 
   while (!this.should_stop_iter()) {
     // Each iteration will finish one gym
-    this.update_callback(gym_idx, this.exercise_idx);
+    this.update_callback(gym_idx);
 
     let train_times = cal_func.get_total_train_times(gym_idx);
     let stats_idx = cal_func.stats_idx_map[this.current_focus];
@@ -184,7 +182,6 @@ Exercise_Params.prototype.iter_process = function () {
     // hit the stop condition
     this.finish_train(gym_idx);
     gym_idx += 1;
-    this.exercise_idx += 1;
   }
   console.log("train order is ", this.exercise_chain);
 };
@@ -288,6 +285,10 @@ Exercise_Params.prototype.get_initial_stats = function () {
   this.stats_progress = [this.current_stats.slice()];
 };
 
+Exercise_Params.prototype.get_happiness = function () {
+  this.initial_happiness = Number(document.getElementById('happiness_input').value);
+};
+
 function parse_perks(percentage) {
   if (isNaN(percentage) || Number(faction_perks) == 0) {
     return 1;
@@ -315,8 +316,13 @@ Exercise_Params.prototype.read_params = function () {
   // Step 2: get start and stop gym name
   this.get_start_stop_gym();
 
+
+  // Step 3: get happiness
+  this.get_happiness();
+
   // Step 3: get initial stats
   this.get_initial_stats();
+
 
   // Step 4: get bonus perks
   this.get_other_perks();
