@@ -1,4 +1,5 @@
 import * as cal_func from "./calculator.js";
+import * as cnct from "./fb_connect.js"
 
 function format_num(num) {
   if (num > 1e9) {
@@ -41,7 +42,7 @@ export class Exercise_Params {
 
     this.current_stats = [0, 0, 0, 0];
     this.stats_progress = [this.current_stats];
-    this.exercise_chain = new Array(["str"]);
+    this.exercise_chain = new Array([]);
     this.exercise_idx = 0;
 
     this.update_callback = null;
@@ -104,28 +105,26 @@ Exercise_Params.prototype.should_stop_iter = function () {
   // console.log(`current progress is ${this.current_gym_progress}, target progress is ${this.current_gym_limit}`);
   return (
     this.current_gym_name == this.stop_gym_name &&
-    this.current_gym_progress >= this.current_gym_limit
+    this.current_gym_progress >= this.final_gym_target
   );
 };
 
 Exercise_Params.prototype.initialize = function () {
   this.current_gym_name = this.start_gym_name;
+  this.current_happiness = this.initial_happiness;
   this.current_focus = this.exercise_chain[0];
-  this.current_gym_progress = 0;
 
   let gym_idx = cal_func.find_gym_idx(this.current_gym_name);
   this.current_gym_limit = cal_func.gym_exp[gym_idx];
 };
 
-Exercise_Params.prototype.update = function (gym_idx, exercise_idx) {
+Exercise_Params.prototype.update = function (gym_idx) {
   this.current_gym_name = cal_func.gym_name_list[gym_idx];
-  this.current_focus = this.exercise_chain[exercise_idx];
+  this.current_focus = this.exercise_chain[gym_idx];
 };
 
 Exercise_Params.prototype.overall_greedy_update = function (
-  gym_idx,
-  exercise_idx
-) {
+  gym_idx) {
   this.current_gym_name = cal_func.gym_name_list[gym_idx];
   this.current_focus = cal_func.find_greedy_stats(
     gym_idx,
@@ -136,9 +135,7 @@ Exercise_Params.prototype.overall_greedy_update = function (
 };
 
 Exercise_Params.prototype.strspd_greedy_update = function (
-  gym_idx,
-  exercise_idx
-) {
+  gym_idx) {
   this.current_gym_name = cal_func.gym_name_list[gym_idx];
   this.current_focus = cal_func.find_greedy_stats(
     gym_idx,
@@ -154,15 +151,31 @@ Exercise_Params.prototype.finish_train = function (gym_idx) {
   this.stats_progress.push(this.current_stats.slice());
 };
 
+Exercise_Params.prototype.get_gym_exp = function (gym_idx) {
+  let gym_exp = cal_func.gym_exp[gym_idx];
+
+  if (cal_func.find_gym_idx(this.stop_gym_name) == gym_idx){
+    gym_exp = this.final_gym_target;
+  }
+  if (cal_func.find_gym_idx(this.start_gym_name) == gym_idx){
+    gym_exp -= this.current_gym_progress;
+  }
+  console.log(gym_exp);
+  return gym_exp;
+}
 // process_1: using the same happiness for the whole time
 Exercise_Params.prototype.iter_process = function () {
-  let gym_idx = cal_func.find_gym_idx(this.current_gym_name);
+  let start_idx = cal_func.find_gym_idx(this.start_gym_name);
+  let stop_idx = cal_func.find_gym_idx(this.stop_gym_name);
+  let gym_idx = start_idx;
 
   while (!this.should_stop_iter()) {
     // Each iteration will finish one gym
-    this.update_callback(gym_idx, this.exercise_idx);
+    this.update_callback(gym_idx);
+    
+    let gym_exp = this.get_gym_exp(gym_idx);
 
-    let train_times = cal_func.get_total_train_times(gym_idx);
+    let train_times = cal_func.get_total_train_times(gym_idx, gym_exp);
     let stats_idx = cal_func.stats_idx_map[this.current_focus];
 
     // console.log(`train_times: ${train_times}`);
@@ -177,15 +190,14 @@ Exercise_Params.prototype.iter_process = function () {
     }
     // console.log(this.current_focus, this.current_gym_name, this.current_stats[stats_idx].toFixed(2), this.current_happiness, this.current_bonus);
 
-    console.log(
-      `finish ${this.current_gym_name}, stats changed to ${this.stats_info()}`
-    );
+    // console.log(
+    //   `finish ${this.current_gym_name}, stats changed to ${this.stats_info()}`
+    // );
     // hit the stop condition
     this.finish_train(gym_idx);
     gym_idx += 1;
-    this.exercise_idx += 1;
   }
-  console.log("train order is ", this.exercise_chain);
+  console.log("train order is ", this.exercise_chain.slice(start_idx, stop_idx+1));
 };
 
 function pathTo(ctx, xStart, yStart, xStep, yStep, x, y, move=true) {
@@ -224,111 +236,16 @@ function drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, coef){
   ctx.moveTo(xMargin, yMargin);
   ctx.lineTo(xMargin, canvas.height - yMargin);
   ctx.lineTo(canvas.width - xMargin, canvas.height - yMargin);
-  ctx.lineWidth = 10;
+  ctx.lineWidth = 6;
   ctx.stroke();
   return [xStep, yStep, xStart, yStart];
 }
 
-Exercise_Params.prototype.render_result = function () {
-  // console.log(`after exercise from ${this.start_gym_name} to ${this.stop_gym_name
-  //   },\
-  //     \nyour stats is \
-  //     \nstr = ${format_num(this.current_stats[0])}, \
-  //     \ndef = ${format_num(this.current_stats[1])}, \
-  //     \nspd = ${format_num(this.current_stats[2])}, \
-  //     \ndex = ${format_num(this.current_stats[3])}`);
-
-
-  let self = this;
-  (function fill_result_table() {
-    let str_result = document.getElementById("str_label");
-    let def_result = document.getElementById("def_label");
-    let spd_result = document.getElementById("spd_label");
-    let dex_result = document.getElementById("dex_label");
-
-    str_result.textContent = format_num(self.current_stats[0]);
-    def_result.textContent = format_num(self.current_stats[1]);
-    spd_result.textContent = format_num(self.current_stats[2]);
-    dex_result.textContent = format_num(self.current_stats[3]);
-  })();
-
-  (function render_canvas() {
-    let canvas = document.getElementById("stats_change_graph");
-    let ctx = canvas.getContext("2d");
-    resize_canvas(canvas,ctx);
-
-    let start_idx = cal_func.find_gym_idx(self.start_gym_name);
-    let stop_idx = cal_func.find_gym_idx(self.stop_gym_name);
-    
-    // draw axis
-    const xMargin = Math.floor(canvas.width * 0.075);
-    const yMargin = Math.floor(canvas.height * 0.075);
-    const xMin = 0, xMax = stop_idx - start_idx + 1;
-    const yMin = 0, yMax = Math.max(...self.current_stats);
-    let [xStep, yStep, xStart, yStart] = drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, 0.075);
-
-    ctx.lineWidth = 5;
-    for (let i = xMin; i <= xMax; i++) {
-      drawLine(ctx, xStart, yStart, xStep, yStep, i-xMin, 0, i-xMin, yMax / 50, "black");
-      drawLine(ctx, xStart, yStart, xStep, yStep, 0, yMax / (xMax - xMin + 1) * (i - xMin), xMax / 90, yMax / (xMax - xMin + 1) * (i - xMin), "black");
-    }
-
-    // draw four lines
-    let x = new Array();
-    let y = new Array();
-    for (let i = start_idx; i <= stop_idx + 1; i++) {
-      x.push(i - start_idx);
-      y.push(self.stats_progress[i - start_idx].slice());
-    }
-
-    let color = ["red", "green", "yellow", "purple"];
-    for (let i = cal_func.STR; i <= cal_func.DEX; i++){
-      ctx.strokeStyle = color[i];
-      ctx.beginPath();
-      pathTo(ctx, xStart, yStart, xStep, yStep, x[0], y[0][i]);
-      for (let j = 1; j < x.length; j++) {
-        pathTo(ctx, xStart, yStart, xStep, yStep, x[j], y[j][i], false);
-      }
-      ctx.lineWidth = 5;
-      ctx.stroke();
-      ctx.save();
-    }
-
-    // draw legend
-    const legend_fontsize = 32;
-    let legend_y_start = yMargin * 2;
-    ctx.font = "32px Arial";
-    ctx.fillStyle = "red";
-    ctx.fillText("Str", canvas.width / 2, legend_y_start);
-    ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
-    
-    ctx.fillStyle = "green";
-    legend_y_start += yMargin;
-    ctx.fillText("Def", canvas.width / 2, legend_y_start);
-    ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
-
-    ctx.fillStyle = "yellow";
-    legend_y_start += yMargin;
-    ctx.fillText("Spd", canvas.width / 2, legend_y_start);
-    ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
-    
-    ctx.fillStyle = "purple";
-    legend_y_start += yMargin;
-    ctx.fillText("Dex", canvas.width / 2, legend_y_start);
-    ctx.fillRect(canvas.width / 2 + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
-    
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(canvas.width / 2 - 32, 2*yMargin - 40, 320, legend_y_start - yMargin);
-
-})();
-};
-
-var PRESET_SELECTOR_USER_DEFINED = 0;
-var PRESET_SELECTOR_GREEDY_OVERALL = 1;
-var PRESET_SELECTOR_GREEDY_STR_SPD = 2;
+export var PRESET_SELECTOR_USER_DEFINED = 0;
+export var PRESET_SELECTOR_GREEDY_OVERALL = 1;
+export var PRESET_SELECTOR_GREEDY_STR_SPD = 2;
 Exercise_Params.prototype.read_preset = function () {
-  let element = document.getElementById("preset_selector");
+  let element = cnct.get_preset_select();
 
   if (element.selectedIndex == PRESET_SELECTOR_USER_DEFINED) {
     this.update_callback = this.update;
@@ -346,7 +263,7 @@ Exercise_Params.prototype.read_preset = function () {
 Exercise_Params.prototype.get_exercise_chain = function () {
   this.clear_attr();
   var alert_ = false;
-  document.querySelectorAll(".attr_select").forEach((element) => {
+  cnct.get_all_attr_select().forEach((element) => {
     let idx = element.selectedIndex;
     if (element.options[idx].text == "same as above") {
       this.push_attr(this.last_attr());
@@ -363,15 +280,20 @@ Exercise_Params.prototype.get_exercise_chain = function () {
 };
 
 Exercise_Params.prototype.get_start_stop_gym = function () {
-  document.querySelectorAll(".gym_row").forEach((element) => {
+  cnct.get_all_gym_row().forEach((element) => {
     // console.log("check", element.querySelector('td').textContent);
-    if (element.querySelector('input[name="start_opt"').checked) {
+    if (cnct.get_start_opt(element).checked) {
       this.start_gym_name = element.querySelector("td").textContent;
     }
-    if (element.querySelector('input[name="stop_opt"').checked) {
+    if (cnct.get_stop_opt(element).checked) {
       this.stop_gym_name = element.querySelector("td").textContent;
     }
   });
+
+  this.current_gym_progress = Number(document.getElementById("initial_progress").value);
+  this.final_gym_target = Number(document.getElementById("final_progress").value);
+
+  console.log("start from", this.start_gym_name, "end at", this.stop_gym_name, "final progress", this.final_gym_target);
 };
 
 Exercise_Params.prototype.get_initial_stats = function () {
@@ -382,6 +304,10 @@ Exercise_Params.prototype.get_initial_stats = function () {
   this.stats_progress = [this.current_stats.slice()];
 };
 
+Exercise_Params.prototype.get_happiness = function () {
+  this.initial_happiness = Number(document.getElementById('happiness_input').value);
+};
+
 function parse_perks(percentage) {
   if (isNaN(percentage) || Number(faction_perks) == 0) {
     return 1;
@@ -390,9 +316,7 @@ function parse_perks(percentage) {
 }
 
 Exercise_Params.prototype.get_other_perks = function () {
-  let faction_perks = document.getElementById('faction_perks').value;
-  let property_perks = document.getElementById('property_perks').value;
-
+  let [faction_perks, property_perks] = cnct.get_other_perks();
   console.log("faction_perks = " + faction_perks, "property_perks = " + property_perks);
 
   this.current_bonus *= parse_perks(faction_perks);
@@ -411,10 +335,14 @@ Exercise_Params.prototype.read_params = function () {
   // Step 2: get start and stop gym name
   this.get_start_stop_gym();
 
-  // Step 3: get initial stats
+  // Step 3: get happiness
+  this.get_happiness();
+
+  // Step 4: get initial stats
   this.get_initial_stats();
 
-  // Step 4: get bonus perks
+
+  // Step 5: get bonus perks
   this.get_other_perks();
 };
 
@@ -427,7 +355,7 @@ Exercise_Params.prototype.show_gym_dots = function (dom) {
   let gym_dots = cal_func.find_gym_dot(gym_name);
   console.log("gym is ", gym_name, "dots is ", gym_dots);
 
-  let canvas = document.getElementById("gym_dots");
+  let canvas = cnct.get_gym_dots();
   var ctx = canvas.getContext("2d");
   resize_canvas(canvas, ctx);
 
@@ -453,4 +381,94 @@ Exercise_Params.prototype.show_gym_dots = function (dom) {
     ctx.fillText(text[i], xStart + (i + 0.75) * xStep, yStart + 24);
     ctx.fillText(gym_dots[i].toFixed(1), xStart + (i + 0.75) * xStep, yStart -gym_dots[i] * yStep * 0.85);
   }
+}
+
+Exercise_Params.prototype.render_result = function () {
+  let self = this;
+  (function fill_result_table() {
+    let [str_result, def_result, spd_result, dex_result] = cnct.get_result_label();
+    str_result.textContent = format_num(self.current_stats[0]);
+    def_result.textContent = format_num(self.current_stats[1]);
+    spd_result.textContent = format_num(self.current_stats[2]);
+    dex_result.textContent = format_num(self.current_stats[3]);
+  })();
+
+  (function render_canvas() {
+    let canvas = cnct.get_stats_canvas()
+    let ctx = canvas.getContext("2d");
+    resize_canvas(canvas,ctx);
+
+    let start_idx = cal_func.find_gym_idx(self.start_gym_name);
+    let stop_idx = cal_func.find_gym_idx(self.stop_gym_name);
+    
+    // draw axis
+    const yMargin = Math.floor(canvas.height * 0.075);
+    const xMin = 0, xMax = stop_idx - start_idx + 1;
+    const yMin = 0, yMax = Math.max(...self.current_stats);
+    let [xStep, yStep, xStart, yStart] = drawAxis(canvas, ctx, xMin, xMax, yMin, yMax, 0.075);
+
+    ctx.lineWidth = 3;
+    for (let i = xMin; i <= xMax; i++) {
+      drawLine(ctx, xStart, yStart, xStep, yStep, i-xMin, 0, i-xMin, yMax / 50, "black");
+      drawLine(ctx, xStart, yStart, xStep, yStep, 0, yMax / (xMax - xMin + 1) * (i - xMin), xMax / 90, yMax / (xMax - xMin + 1) * (i - xMin), "black");
+    }
+
+    // draw four lines
+    let x = new Array();
+    let y = new Array();
+    for (let i = start_idx; i <= stop_idx + 1; i++) {
+      x.push(i - start_idx);
+      y.push(self.stats_progress[i - start_idx].slice());
+    }
+
+    let color = ["red", "green", "yellow", "purple"];
+    for (let i = cal_func.STR; i <= cal_func.DEX; i++){
+      ctx.strokeStyle = color[i];
+      ctx.beginPath();
+      pathTo(ctx, xStart, yStart, xStep, yStep, x[0], y[0][i]);
+      for (let j = 1; j < x.length; j++) {
+        pathTo(ctx, xStart, yStart, xStep, yStep, x[j], y[j][i], false);
+      }
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.save();
+    }
+
+    // draw legend
+    const legend_fontsize = 24;
+    let x_offset = 100;
+    let legend_y_start = yMargin * 2;
+    ctx.font = legend_fontsize+"px Mono";
+
+    ctx.fillStyle = "red";
+    ctx.fillText("Str", x_offset, legend_y_start);
+    ctx.fillRect(x_offset + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
+    
+    ctx.fillStyle = "green";
+    legend_y_start += yMargin;
+    ctx.fillText("Def", x_offset, legend_y_start);
+    ctx.fillRect(x_offset + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
+
+    ctx.fillStyle = "yellow";
+    legend_y_start += yMargin;
+    ctx.fillText("Spd", x_offset, legend_y_start);
+    ctx.fillRect(x_offset + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
+    
+    ctx.fillStyle = "purple";
+    legend_y_start += yMargin;
+    ctx.fillText("Dex", x_offset, legend_y_start);
+    ctx.fillRect(x_offset + legend_fontsize * 3, legend_y_start - legend_fontsize / 2, legend_fontsize * 4, yMargin / 5);
+    
+    // ctx.strokeStyle = "black";
+    // ctx.lineWidth = 3;
+    // ctx.strokeRect(canvas.width / 2 - 32, 2*yMargin - 40, 320, legend_y_start - yMargin);
+
+})();
+};
+
+export function Refresh_Target(dom)
+{
+    let gym_name = dom.parentNode.parentNode.querySelector("td").textContent;
+    let gym_idx = cal_func.find_gym_idx(gym_name);
+    document.getElementById("final_progress").value = cal_func.gym_exp[gym_idx];
 }

@@ -26,4 +26,4 @@
 * [🧠 内部攻略](/tutorials/xi-tong-gong-zuo.md)
   <!-- * [系统工作](/tutorials/xi-tong-gong-zuo.md) -->
 
-* [健身房模拟器](script/js/index.html ':include')
+* [🥊 健身房模拟器](https://www.hanlulu.tk/torn)

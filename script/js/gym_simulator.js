@@ -1,4 +1,5 @@
 import * as sim from "./simulator_class.js"
+import * as cnct from "./fb_connect.js"
 
 /** 
  * @param {sim.Exercise_Params} handle 
@@ -15,27 +16,25 @@ function simulation_process(handle) {
   handle.render_result();
 }
 
-
-
 /** 
  * @param {sim.Exercise_Params} handle 
  */
 function watch_btn(handle) {
-  var startButton = document.getElementById('start_btn');
+  var startButton = cnct.get_start_btn();
   startButton.addEventListener('click', function () {
     console.log("Start Simulation!");
     simulation_process(handle);
   });
 
-  var resetButton = document.getElementById('reset_btn');
+  var resetButton = cnct.get_reset_btn();
   resetButton.addEventListener('click', function () {
     console.log("Reset Simulation Params!");
     handle.reset_all_params();
-    document.querySelectorAll('.gym_row').forEach( element => {
-      if (element.querySelector('.attr_select').length > 5)
-        element.querySelector('.attr_select').selectedIndex = 5;
+    cnct.get_all_gym_row().forEach( element => {
+      if (cnct.get_attr_select(element).length > 5)
+        cnct.get_attr_select(element).selectedIndex = 5;
       else
-        element.querySelector('.attr_select').selectedIndex = 0;
+        cnct.get_attr_select(element).selectedIndex = 0;
     });
   });
 }
@@ -44,17 +43,20 @@ function watch_btn(handle) {
  * @param {sim.Exercise_Params} handle 
  */
 function watch_preset(handle) {
-  var presetOpt = document.getElementById('preset_selector');
+  var presetOpt = cnct.get_preset_select();
 
   presetOpt.onchange = function () {
-    handle.get_start_stop_gym();
-    handle.get_initial_stats();
+    console.log(this);
     if (this.selectedIndex == sim.PRESET_SELECTOR_USER_DEFINED) {
-      return;
+      cnct.get_all_gym_row().forEach( element => {
+        cnct.get_attr_select(element).selectedIndex = 5;
+      });
+      let first = cnct.get_all_gym_row()[0];
+      cnct.get_attr_select(first).selectedIndex = 0;
     }
     else {
-      document.querySelectorAll('.gym_row').forEach( element => {
-        element.querySelector('.attr_select').selectedIndex = 4;
+      cnct.get_all_gym_row().forEach( element => {
+        cnct.get_attr_select(element).selectedIndex = 4;
       });
     }
   };
@@ -64,16 +66,28 @@ function watch_preset(handle) {
  * @param {sim.Exercise_Params} handle
  */
 function watch_dots(handle) {
-  document.querySelectorAll(".attr_select").forEach(element => {
+  cnct.get_all_attr_select().forEach(element => {
     element.addEventListener("click", function() {
       handle.show_gym_dots(this);
     })
   });
 }
 
+function refresh_target_progress() {
+  cnct.get_all_stop_select().forEach( element => {
+    element.addEventListener("click", function() {
+      sim.Refresh_Target(this);
+    });
+  });
+}
+
+/**
+ * 主函数
+ */
 (function () {
   var handle = new sim.Exercise_Params();
   watch_btn(handle);
   watch_preset(handle);
   watch_dots(handle);
+  refresh_target_progress();
 })();

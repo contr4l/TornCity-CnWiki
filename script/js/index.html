@@ -1,24 +1,42 @@
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.css"
+        integrity="sha512-utquZ+DZS3UMUcYAp8Hikmxnkbf/w/wfV56JBLzQBmVFMurUjEjfqElxVVVKy/yD+rZm83SWCAsO8GRR9AngFA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+
         select {
             font-size: 12;
             width: 90%;
-            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
         option {
             text-align: center;
-            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        th,td {
+        th,
+        td {
             font-size: 12;
-            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             text-align: center;
         }
 
         input {
-            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             margin-top: 0.5px;
             font-size: 12;
             vertical-align: middle;
@@ -26,7 +44,7 @@
         }
 
         label {
-            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 12;
             vertical-align: middle;
         }
@@ -42,722 +60,796 @@
 
 <body>
 
-<div style="position: relative; display: flex; width: 100%; height: 100%; padding: 0px;">
-    
-    <div style="width:35%; float:left; padding:10px; padding-right: 5px; padding-bottom: 0px; height: 95%;">
-        <div style="padding-bottom: 3px; max-height: 80%; overflow: scroll;">
-            <table border="1" cellspacing="0" style="width: 100%;">
-                <tr >
+    <div style="position: relative; display: flex; width: 100%; height: 100%; padding: 0px;">
+
+        <div style="width:35%; float:left; padding:10px; padding-right: 5px; padding-bottom: 0px; height: 95%;">
+            <div style="padding-bottom: 3px; max-height: 80%; overflow: scroll;">
+                <table border="1" cellspacing="0" style="width: 100%;">
+                    <tr>
                         <th width="37%">Gym Name</th>
                         <th width="37%">To Train</th>
                         <th width="26%" colspan="2">Breakpoint</th>
-                </tr>
-        
-                <tr>
-                    <td colspan="4" style="font-size:medium;">
-                        Light Weight Gym
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Premier Fitness</td>
-                    <td>
-                        <select class="attr_select">
-                            <option selected>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start" checked>
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Average Joes</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Woody's Workout</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Beach Bods</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Silver Gym</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Pour Femme</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Davies Den</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Global Gym</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr>
-                    <td colspan="4" style="font-size:medium;">
-                        Middle Weight Gym
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Knuckle Heads</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Pioneer Fitness</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Anabolic Anomalies</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Core</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Racing Fitness</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Complete Cardio</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Legs, Bums and Tums</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Deep Burn</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr>
-                    <td colspan="4" style="font-size:medium;">
-                        Heavy Weight Gym
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Apollo Gym</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Gun Shop</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Force Training</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Cha Cha's</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Atlas</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>Last Round</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>The Edge</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop">
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-        
-                <tr class="gym_row">
-                    <td>George's</td>
-                    <td>
-                        <select class="attr_select">
-                            <option>str</option>
-                            <option>def</option>
-                            <option>spd</option>
-                            <option>dex</option>
-                            <option>PRESET</option>
-                            <option selected>same as above</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="radio" name="start_opt" value="start" id="start">
-                        <label for="start">Start</label>
-                    </td>
-                    <td>
-                        <input type="radio" name="stop_opt" value="stop" id="stop" checked>
-                        <label for="stop">Stop</label>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        
-        <div style="height:4%;">
-            <table style="background-color: #fff; width: 100%;">
-                <tr>
-                    <th width="50%">
-                        <button id="start_btn"> start simulation</button>
-                    </th>
-                    <th width="50%">
-                        <button id="reset_btn"> rest gym params</button>
-                    </th>
-                </tr>
-                    
-            </table>
-        </div>
-
-        <div style="height:15%;">
-            <canvas id="gym_dots" style="width: 100%; height: 100%; background-color: #eeeeee;"></canvas>
-        </div>
-    </div>
-        
-    <div style="width:65%; float:left; padding:10px; padding-right: 5px; padding-bottom: 0px;">
-        <div id="right-up" style="display: flex; max-height: 40%; width:100%; overflow: hidden;">
-            <div id="right-up-left" style="float:left; width: 50%;">
-                <table id="perks_set" border="1" style="table-layout: fixed; width:100%; background-color: yellow;">
-                    <tr>
-                        <th colspan="2" style="font-size: 12; text-align: center;">
-                            Other Params
-                        </th>
                     </tr>
 
                     <tr>
-                        <td>Happiness</td>
+                        <td colspan="4" style="font-size:medium;">
+                            Light Weight Gym
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Premier Fitness</td>
                         <td>
-                            <input id="happiness_input" type="number" style="width:80%" value="5025"></input>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td colspan="2" style="font-size: 12; font-weight: bold;">
-                            Initial Stats
-                        </td>
-                    </tr>
-
-                    <tr class="cur_stats">
-                        <td>Strength</td>
-                        <td>
-                            <input id="str_input" type="number" style="width:80%; text-align: center;" value="10.00"></input>
-                        </td>
-                    </tr>
-
-                    <tr class="cur_stats">
-                        <td>Defense</td>
-                        <td>
-                            <input id="def_input" type="number" style="width:80%; text-align: center;" value="10.00"></input>
-                        </td>
-                    </tr>
-
-                    <tr class="cur_stats">
-                        <td>Speed</td>
-                        <td>
-                            <input id="spd_input" type="number" style="width:80%; text-align: center;" value="10.00"></input>
-                        </td>
-                    </tr>
-
-                    <tr class="cur_stats">
-                        <td>Dexterity</td>
-                        <td>
-                            <input id="dex_input" type="number" style="width:80%; text-align: center;" value="10.00"></input>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" style="font-size: 12; font-weight: bold;">
-                            Other Perks
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Faction perks(%)</td>
-                        <td>
-                            <input id="faction_perks" type="number" style="width:80%" value="10" ></input>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Property perks(%)</td>
-                        <td>
-                            <input id="property_perks" type="number" style="width:80%" value="2"></input>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" style="font-size: 12; font-weight: bold;">
-                            Predefined Set
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Strategy</td>
-                        <td>
-                            <select id="preset_selector" style="width:80%;">
-                                <option selected>User Defined</option>
-                                <option>Greedy Overall</option>
-                                <option>Greedy Str/Spd</option>
+                            <select class="attr_select">
+                                <option selected>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
                             </select>
                         </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start" checked>
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
                     </tr>
 
+                    <tr class="gym_row">
+                        <td>Average Joes</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Woody's Workout</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Beach Bods</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Silver Gym</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Pour Femme</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Davies Den</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Global Gym</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" style="font-size:medium;">
+                            Middle Weight Gym
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Knuckle Heads</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Pioneer Fitness</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Anabolic Anomalies</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Core</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Racing Fitness</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Complete Cardio</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Legs, Bums and Tums</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Deep Burn</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" style="font-size:medium;">
+                            Heavy Weight Gym
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Apollo Gym</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Gun Shop</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Force Training</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Cha Cha's</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Atlas</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>Last Round</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>The Edge</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop">
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
+
+                    <tr class="gym_row">
+                        <td>George's</td>
+                        <td>
+                            <select class="attr_select">
+                                <option>str</option>
+                                <option>def</option>
+                                <option>spd</option>
+                                <option>dex</option>
+                                <option>PRESET</option>
+                                <option selected>same as above</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="radio" name="start_opt" value="start" id="start">
+                            <label for="start">Start</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="stop_opt" value="stop" id="stop" checked>
+                            <label for="stop">Stop</label>
+                        </td>
+                    </tr>
                 </table>
             </div>
-            
-            <div id="right-up-right" style="float:left; width: 50%; ">
-                <table id="result_info" border="1" style="table-layout: fixed; width:100%; height:100%; background-color: green;">
+
+            <div style="padding-top: 5px; padding-bottom: 5px;">
+                <table style="background-color: #fff; width: 100%;">
                     <tr>
-                        <th colspan="2" style="font-size: 24; font-weight: bold; text-align: center;">
-                            Simulation Result
+                        <th width="33%">
+                            <button id="guide_btn" onclick="showGuide()">User Guide</button>
+                        </th>
+                        <!-- <th width="33%">
+                        <button id="translate_btn">Translation</button>
+                    </th> -->
+                        <th width="33%">
+                            <button id="dev_plan_btn" onclick="showDevPlan()">Dev Plans</button>
+                        </th>
+                        <th width="33%">
+                            <a id="contact" href="https://www.torn.com/messages.php#/p=compose&XID=2893026">Report Issue</a>
                         </th>
                     </tr>
-                    
-                    <tr>
-                        <td style="font-size: 15;">Strength</td>
-                        <td>
-                            <label id="str_label" type="number" style="width:80%; font-size: 15;" ></label>
-                        </td>
-                    </tr>
-
 
                     <tr>
-                        <td style="font-size: 15;">Defense</td>
-                        <td>
-                            <label id="def_label" type="number" style="width:80%; font-size: 15;" ></label>
-                        </td>
+                        <th width="33%">
+                            <button id="start_btn">Start Simulation</button>
+                        </th>
+                        <th width="33%">
+                            <button id="reset_btn">Reset Gym Params</button>
+                        </th>
+                        <th width="33%">
+                            <a id="wiki" href="https://wiki.smth.vip/#">Torn Wiki</a>
+                        </th>
                     </tr>
-
-                    <tr>
-                        <td style="font-size: 15;">Speed</td>
-                        <td>
-                            <label id="spd_label" type="number" style="width:80%; font-size: 15;" ></label>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="font-size: 15;">Dexterity</td>
-                        <td>
-                            <label id="dex_label" type="number" style="width:80%; font-size: 15;" ></label>
-                        </td>
-                    </tr>
-
                 </table>
+            </div>
+
+            <div style="height:15%;">
+                <canvas id="gym_dots" style="width: 100%; height: 100%; background-color: #eeeeee;"></canvas>
             </div>
         </div>
 
-        <div id="right-down" style="width:100%; max-height: 60%; background-color: #abcdef; ">
-            <canvas id="stats_change_graph" style="width: 100%;"></canvas>
-        </div>
+        <div style="width:65%; float:left; padding:10px; padding-right: 5px; padding-bottom: 0px;">
+            <div id="right-up" style="display: flex; max-height: 40%; width:100%; overflow: hidden;">
+                <div id="right-up-left" style="float:left; width: 50%;">
+                    <table id="perks_set" border="1" style="table-layout: fixed; width:100%; background-color: yellow;">
+                        <tr>
+                            <th colspan="2" style="font-size: 12; text-align: center;">
+                                Other Params
+                            </th>
+                        </tr>
 
+                        <tr>
+                            <td>Happiness</td>
+                            <td>
+                                <input id="happiness_input" type="number" style="width:80%" value="5025"></input>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Start Experience</td>
+                            <td>
+                                <input id="initial_progress" type="number" style="width:80%" value="0"></input>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Final Experience</td>
+                            <td>
+                                <input id="final_progress" type="number" style="width:80%" value="20000"></input>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="font-size: 12; font-weight: bold;">
+                                Initial Stats
+                            </td>
+                        </tr>
+
+                        <tr class="cur_stats">
+                            <td>Strength</td>
+                            <td>
+                                <input id="str_input" type="number" style="width:80%; text-align: center;"
+                                    value="10.00"></input>
+                            </td>
+                        </tr>
+
+                        <tr class="cur_stats">
+                            <td>Defense</td>
+                            <td>
+                                <input id="def_input" type="number" style="width:80%; text-align: center;"
+                                    value="10.00"></input>
+                            </td>
+                        </tr>
+
+                        <tr class="cur_stats">
+                            <td>Speed</td>
+                            <td>
+                                <input id="spd_input" type="number" style="width:80%; text-align: center;"
+                                    value="10.00"></input>
+                            </td>
+                        </tr>
+
+                        <tr class="cur_stats">
+                            <td>Dexterity</td>
+                            <td>
+                                <input id="dex_input" type="number" style="width:80%; text-align: center;"
+                                    value="10.00"></input>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="font-size: 12; font-weight: bold;">
+                                Other Perks
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Faction perks(%)</td>
+                            <td>
+                                <input id="faction_perks" type="number" style="width:80%" value="10"></input>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Property perks(%)</td>
+                            <td>
+                                <input id="property_perks" type="number" style="width:80%" value="2"></input>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="font-size: 12; font-weight: bold;">
+                                Predefined Set
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Strategy</td>
+                            <td>
+                                <select id="preset_selector" style="width:80%;">
+                                    <option selected>User Defined</option>
+                                    <option>Greedy Overall</option>
+                                    <option>Greedy Str/Spd</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div id="right-up-right" style="float:left; width: 50%; ">
+                    <table id="result_info" border="1"
+                        style="table-layout: fixed; width:100%; height:100%; background-color: green;">
+                        <tr>
+                            <th colspan="2" style="font-size: 24; font-weight: bold; text-align: center;">
+                                Simulation Result
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td style="font-size: 15;">Strength</td>
+                            <td>
+                                <label id="str_label" type="number" style="width:80%; font-size: 15;"></label>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td style="font-size: 15;">Defense</td>
+                            <td>
+                                <label id="def_label" type="number" style="width:80%; font-size: 15;"></label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="font-size: 15;">Speed</td>
+                            <td>
+                                <label id="spd_label" type="number" style="width:80%; font-size: 15;"></label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="font-size: 15;">Dexterity</td>
+                            <td>
+                                <label id="dex_label" type="number" style="width:80%; font-size: 15;"></label>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div id="right-down" style="width:100%; max-height: 60%; background-color: #abcdef; ">
+                <canvas id="stats_change_graph" style="width: 100%;"></canvas>
+            </div>
+        </div>
     </div>
-</div>
 
 </body>
 
 <script type="module" src="./gym_simulator.js"></script>
+<script type="text/javascript" src='https://cdn.jsdelivr.net/npm/marked/marked.min.js'></script>
+<script type="text/javascript">
+    function get_guide_content(content) {
+        const regex = new RegExp("<!-- 使用说明开始 -->([\\s\\S]*?)<!-- 使用说明结束 -->", "im");
+        return content.match(regex)[1];
+    }
+
+    function get_dev_plan(content) {
+        const regex = new RegExp("<!-- 开发进展开始 -->([\\s\\S]*?)<!-- 开发进展结束 -->", "im");
+        return content.match(regex)[1];
+    }
+
+    function inherit_stylesheet(document) {
+        document.write('<head>\n<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.css" integrity="sha512-utquZ+DZS3UMUcYAp8Hikmxnkbf/w/wfV56JBLzQBmVFMurUjEjfqElxVVVKy/yD+rZm83SWCAsO8GRR9AngFA==" crossorigin="anonymous" referrerpolicy="no-referrer" />\n</head>');
+    }
+
+    function showMd(file, cb) {
+        const popupWindow = window.open("", "Popup", "width=600,height=800");
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', file);
+        xhr.onload = () => {
+            inherit_stylesheet(popupWindow.document);
+            popupWindow.document.write("<article id='content' class='markdown-body'></article>");
+            let guide_info = cb(xhr.responseText);
+            popupWindow.document.getElementById('content').innerHTML = marked.parse(guide_info);
+        }
+        xhr.send();
+    }
+
+    function showGuide() {
+        showMd("./progress.md", get_guide_content);
+    }
+
+    function showDevPlan() {
+        showMd("./progress.md", get_dev_plan);
+    }
+
+    
+</script>
