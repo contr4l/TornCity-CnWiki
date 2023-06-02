@@ -16,24 +16,42 @@ class TornLogCatcher:
 
     def __init__(self, key):
         self.api_key = key
+        self.header = {}
 
-    def _general_request(self, url):
-        url = url + "&key=" + self.api_key
+    def set_cookie(self, cookie):
+        self.header["Cookie"] = cookie
+
+    def set_ua(self, agent):
+        self.header["User-Agent"] = agent
+
+    def clear_header(self):
+        self.header = {}
+
+    def _general_request(self, url, deprecate_key = False, json_format = True, session = None):
+        if not deprecate_key:
+            url = url + "&key=" + self.api_key
 
         print("send requests {}".format(url))
         
-        res = requests.get(url)
+        res = ""
+        if session:
+            res = session.get(url)
+        else:
+            res = requests.get(url, self.header)
         if res.status_code != 200:
             print("api request gets negative response!")
             raise TimeoutError
         
-        content = json.loads(res.text)
-        
-        if "error" in content:
-            print("errcode = {}, errmsg = {}".format(content["error"]["code"], content["error"]["error"]))
-            raise PermissionError
+        if json_format:
+            content = json.loads(res.text)
+            
+            if "error" in content:
+                print("errcode = {}, errmsg = {}".format(content["error"]["code"], content["error"]["error"]))
+                raise PermissionError
 
-        return content
+            return content
+        else:
+            return res
     
     def get_all_log(self):
         url = "https://api.torn.com/user/?selections=log"
