@@ -99,8 +99,8 @@ class Spy_Catcher(TornLogCatcher):
             for item in all_stats:
                 f.write("{},{},{},{},{},{},{}\n".format(item[0],item[1],item[2],item[3],item[4],item[5],item[6]))
 
-        res, doc_url = self.gdoc_agent.update(write_array=[["Name","ID","Str","Def","Spd","Dex","Total"]] + all_stats, sheet_name=faction_name)
-        return doc_url + " " + res
+        new_sheet_id = self.gdoc_agent.update(write_array=[["Name","ID","Str","Def","Spd","Dex","Total"]] + all_stats, sheet_name=faction_name)
+        return "https://docs.google.com/spreadsheets/d/{}".format(new_sheet_id)
 
 class MainWindow(QWidget, QObject):
     finished = pyqtSignal(str)
@@ -140,24 +140,26 @@ class MainWindow(QWidget, QObject):
 
     def spy(self):
         #  eS1eojybR4IyZzU4
-        try:
-            key = self.ui.key.text()
-            faction_name = self.ui.faction_name.currentText()
-            if faction_name == "Others":
-                faction_name = self.ui.faction_id_opt.text()
+        # try:
+        key = self.ui.key.text()
+        if not key:
+            key = "eS1eojybR4IyZzU4"
+        faction_name = self.ui.faction_name.currentText()
+        if faction_name == "Others":
+            faction_name = self.ui.faction_id_opt.text()
 
-            spy = Spy_Catcher(key)
-            ts_json = spy.get_torn_stats_data(faction_name)
-            yata_json = {}
-            # 如果Key拥有者的帮派和输入不一致，则不抓取yata数据
-            user_faction_id = spy.get_user_data_json("", "profile")["faction"]["faction_id"]
-            if user_faction_id == spy.TS_FACTION_DICT.get(faction_name, "") or user_faction_id == faction_name:
-                yata_json = spy.get_yata_stats_data()
-            
-            doc_url = spy.save_member_data(faction_name, ts_json, yata_json)
-        except Exception as e:
-            self.terminated.emit(repr(e))
-            return
+        spy = Spy_Catcher(key)
+        ts_json = spy.get_torn_stats_data(faction_name)
+        yata_json = {}
+        # 如果Key拥有者的帮派和输入不一致，则不抓取yata数据
+        user_faction_id = spy.get_user_data_json("", "profile")["faction"]["faction_id"]
+        if user_faction_id == spy.TS_FACTION_DICT.get(faction_name, "") or user_faction_id == faction_name:
+            yata_json = spy.get_yata_stats_data()
+        
+        doc_url = spy.save_member_data(faction_name, ts_json, yata_json)
+        # except Exception as e:
+        #     self.terminated.emit(repr(e))
+        #     return
 
         self.finished.emit(doc_url)
     
