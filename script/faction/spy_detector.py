@@ -7,7 +7,7 @@ from basic_ui import Ui_TornSpy
 import threading
 from gdoc_basic import GoogleSheetAgent
 
-from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QInputDialog
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt
 
 GDOC_CRED = "ctr4l_cred.json"
@@ -162,7 +162,9 @@ class MainWindow(QWidget, QObject):
 
     def notify(self, file_name):
         finish_ = QMessageBox()
+        finish_.setWindowTitle("Notify")
         finish_.setText("{} successfully generated!".format(file_name))
+        finish_.setTextInteractionFlags(Qt.TextSelectableByMouse)
         finish_.exec_()
 
     def report_error(self, err):
