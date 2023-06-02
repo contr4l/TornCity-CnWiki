@@ -10,7 +10,7 @@ from gdoc_basic import GoogleSheetAgent
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QInputDialog
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt
 
-GDOC_CRED = "ctr4l_cred.json"
+GDOC_CRED = "./ctr4l_cred.json"
 
 class Spy_Catcher(TornLogCatcher):
     TS_FACTION_DICT = {
@@ -108,6 +108,7 @@ class Spy_Catcher(TornLogCatcher):
             new_sheet_id = self.gdoc_agent.update(write_array=[
                                                   ["Name", "ID", "Str", "Def", "Spd", "Dex", "Total"]] + all_stats, sheet_name=faction_name)
         except Exception as e:
+            print(repr(e))
             msg = "Publish to Google Sheet failed, you might not have correct credential, please contact contr4l_."
             print(msg)
             raise ConnectionError(msg)
@@ -173,11 +174,10 @@ class MainWindow(QWidget, QObject):
         finish_.exec_()
 
     def spy(self):
-        #  eS1eojybR4IyZzU4
         try:
             key = self.ui.key.text()
-            if not key:
-                key = "eS1eojybR4IyZzU4"
+            # if not key:
+            #     key = "eS1eojybR4IyZzU4"
             faction_name = self.ui.faction_name.currentText()
             if faction_name == "Others":
                 faction_name = self.ui.faction_id_opt.text()

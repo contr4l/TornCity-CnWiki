@@ -98,7 +98,7 @@ class Ui_TornSpy(object):
 
     def retranslateUi(self, TornSpy):
         _translate = QtCore.QCoreApplication.translate
-        TornSpy.setWindowTitle(_translate("TornSpy", "Form"))
+        TornSpy.setWindowTitle(_translate("TornSpy", "TornSpy"))
         self.faction_name.setItemText(0, _translate("TornSpy", "CCRC"))
         self.faction_name.setItemText(1, _translate("TornSpy", "PTA"))
         self.faction_name.setItemText(2, _translate("TornSpy", "PN"))

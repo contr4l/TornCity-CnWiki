@@ -10,9 +10,16 @@ class GoogleSheetAgent():
     def validate(self):
         self.creds = service_account.Credentials.from_service_account_file(
             self.credentials)
-        self.service = build("sheets", "v4", credentials=self.creds)
-        self.drive = build("drive", "v3", credentials=self.creds)
-
+        
+        try:
+            self.service = build("sheets", "v4", credentials=self.creds)
+            self.drive = build("drive", "v3", credentials=self.creds)
+        except:
+            DSU_SHEETS = 'https://sheets.googleapis.com/$discovery/rest?version=v4'
+            DSU_DRIVE = "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
+            self.service = build('sheets', 'v4', credentials=self.creds, discoveryServiceUrl=DSU_SHEETS)
+            self.drive = build("drive", "v3", credentials=self.creds, discoveryServiceUrl=DSU_DRIVE)
+            
     def update(self, sheetID="19935qbJgQONgggFQBm80nBxOAjTGnL7_pEjslfzi7q8", write_array=[[]], sheet_name="CCRC", valueInputOptions="RAW"):
         if not self.check_sheet_existence(sheetID, sheet_name):
             self.create_sheet(sheetID, sheet_name)
