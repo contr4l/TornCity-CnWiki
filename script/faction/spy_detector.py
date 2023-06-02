@@ -1,16 +1,15 @@
-import requests, sys
+import requests
+import sys
 from collections import defaultdict
 
 from log_catcher import TornLogCatcher
 from basic_ui import Ui_Form
 import threading
+from gdoc_basic import GoogleSheetAgent
 
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
-from PyQt5.QtCore import QObject, QRunnable, pyqtSignal, pyqtSlot, QThreadPool
-
-class WorkerSignals(QObject):
-    finished = pyqtSignal()
-    result = pyqtSignal(object)
+from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt
+import PyQt5
 
 class Spy_Catcher(TornLogCatcher):
     TS_FACTION_DICT = {
@@ -25,6 +24,7 @@ class Spy_Catcher(TornLogCatcher):
     def __init__(self, key):
         super().__init__(key)
         self.ts_session = requests.Session()
+        self.gdoc_agent = GoogleSheetAgent("ctr4l_cred.json")
 
     def get_torn_stats_data(self, faction_name):
         if faction_name not in Spy_Catcher.TS_FACTION_DICT:
@@ -40,7 +40,7 @@ class Spy_Catcher(TornLogCatcher):
         res = self._general_request(url, True, True, self.ts_session)
         return res
 
-    def save_member_data(self, filename, ts_json_, yata_json_):
+    def save_member_data(self, faction_name, ts_json_, yata_json_):
         record_users = defaultdict(list)
         
         # torn stats
@@ -81,7 +81,6 @@ class Spy_Catcher(TornLogCatcher):
                                         data["stats_total"]
                                         ]
         except KeyError as e:
-            print(e)
             print("Error encountering when parsing yata stats, Skip now...")
 
         # merge
@@ -95,21 +94,31 @@ class Spy_Catcher(TornLogCatcher):
         all_stats.sort(key=lambda x:x[6], reverse=True)
 
         # write
-        with open(filename, "w") as f:
+        with open(faction_name + "_SPY.csv", "w") as f:
             f.write("Name,ID,Str,Def,Spd,Dex,Total\n")
             for item in all_stats:
                 f.write("{},{},{},{},{},{},{}\n".format(item[0],item[1],item[2],item[3],item[4],item[5],item[6]))
+
+        res, doc_url = self.gdoc_agent.update(write_array=[["Name","ID","Str","Def","Spd","Dex","Total"]] + all_stats, sheet_name=faction_name)
+        return doc_url + " " + res
 
 class MainWindow(QWidget, QObject):
     finished = pyqtSignal(str)
     terminated = pyqtSignal(str)
 
+    def set_align_center(self):
+        self.ui.faction_name.setEditable(True)
+        self.ui.faction_name.lineEdit().setAlignment(Qt.AlignCenter)
+        self.ui.faction_name.lineEdit().setReadOnly(True)
+
+        self.ui.key.setAlignment(Qt.AlignCenter)
+        self.ui.faction_id_opt.setAlignment(Qt.AlignCenter)
+
     def __init__(self):
         super().__init__()
-        # self.setLayout()
-
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.set_align_center()
 
         self.ui.pushButton.clicked.connect(self.start)
         self.finished.connect(self.notify)
@@ -118,7 +127,6 @@ class MainWindow(QWidget, QObject):
     def start(self):
         thread = threading.Thread(target=self.spy)
         thread.start()
-
 
     def notify(self, file_name):
         finish_ = QMessageBox()
@@ -137,34 +145,24 @@ class MainWindow(QWidget, QObject):
             faction_name = self.ui.faction_name.currentText()
             if faction_name == "Others":
                 faction_name = self.ui.faction_id_opt.text()
-            file_name = faction_name + "_SPY.csv"
 
             spy = Spy_Catcher(key)
             ts_json = spy.get_torn_stats_data(faction_name)
-            yata_json = spy.get_yata_stats_data()
-            spy.save_member_data(file_name, ts_json, yata_json)
+            yata_json = {}
+            # 如果Key拥有者的帮派和输入不一致，则不抓取yata数据
+            user_faction_id = spy.get_user_data_json("", "profile")["faction"]["faction_id"]
+            if user_faction_id == spy.TS_FACTION_DICT.get(faction_name, "") or user_faction_id == faction_name:
+                yata_json = spy.get_yata_stats_data()
+            
+            doc_url = spy.save_member_data(faction_name, ts_json, yata_json)
         except Exception as e:
             self.terminated.emit(repr(e))
             return
 
-        self.finished.emit(file_name)
+        self.finished.emit(doc_url)
     
 
 if __name__ == "__main__":
-    # if len(sys.argv) < 3:
-    #     print("Usage: spy_detector.py {KEY_FOR_YATA_AND_TS} {FACTION_NAME}")
-    #     print("FACTION_NAME should be CCRC/PTA/PN/SH/NOV/BSU")
-    #     raise IndexError
-    
-    # key = sys.argv[1]
-    # faction_name = sys.argv[2]
-    # file_name = faction_name + "_SPY.csv"
-
-    # spy = Spy_Catcher(key)
-    # ts_json = spy.get_torn_stats_data(faction_name)
-    # yata_json = spy.get_yata_stats_data()
-    # spy.save_member_data(file_name, ts_json, yata_json)
-    
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()

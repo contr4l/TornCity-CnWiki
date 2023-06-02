@@ -20,11 +20,17 @@ def set_key(k):
 import time
 def send_request(url):
     print("send requests {}".format(url))
-    res = requests.get(url)
-    if res.status_code != 200:
-        print("api request gets negative response!")
-        raise TimeoutError
-    time.sleep(0.4)
+    for i in range(3):
+        try:
+            res = requests.get(url)
+            if res.status_code != 200:
+                print("api request gets negative response!")
+                raise TimeoutError
+            break
+        except:
+            print("Retrying request {}".format(url))
+            time.sleep(1)
+            continue
     return json.loads(res.text)
 
 def get_faction_data_json(faction_id) -> json:
@@ -61,14 +67,6 @@ def save_data():
     for faction_id in faction_dict:
         users = get_user_list(faction_id)
         for torn_id in users:
-            print("Visit ", users[torn_id])
-            if flag != 1:
-                if users[torn_id] == "Salusse":
-                    flag = 1
-                    continue
-                else:
-                    continue
-
             user_data = get_user_data_json(torn_id, "personalstats")["personalstats"]
             if user_data["drugsused"] < 50:
                 print("ignore newbies")
@@ -77,7 +75,10 @@ def save_data():
             elif user_data["overdosed"] == 0:
                 print("lucky guys : {} taken {} drugs and overdosed {} times".format(users[torn_id], users.get("drugsused", 0), users.get("overdosed", 0)))    
                 continue
-
+            
+            all_activity = user_data["useractivity"]
+            age = get_user_data_json(torn_id, "profile")["age"]
+            
             f.write("{},{},{},{},{},{},{},{}\n".format(
                 faction_dict[faction_id],
                 users[torn_id],
@@ -86,9 +87,25 @@ def save_data():
                 user_data["xantaken"],
                 user_data["drugsused"],
                 user_data["overdosed"],
-                int(user_data["drugsused"] / user_data["overdosed"])
+                int(user_data["drugsused"] / user_data["overdosed"]),
             ))
+            
     f.close()
+
+def save_active_data():
+    f = open("activity_analyzer.csv", "w")
+    f.write("name,all_activity,age,hours_per_day\n")
+    for faction_id in faction_dict:
+        users = get_user_list(faction_id)
+        for torn_id in users:
+            user_data = get_user_data_json(torn_id, "personalstats,basic,profile")
+            all_activity = user_data["personalstats"]["useractivity"]
+            age = user_data["age"]
+            name = user_data["name"]
+            f.write("{},{},{},{}\n".format(name, all_activity, age, all_activity/3600/(age+1)))
+
+    f.close()
+
 
 import pandas as pd
 import numpy as np
@@ -114,6 +131,9 @@ def analyze_data():
 
 
 if __name__ == "__main__":
-    # set_key("GkGCcSyK7Fa359MT")
+    set_key("GkGCcSyK7Fa359MT")
     # save_data()
-    analyze_data()
+    # analyze_data()
+    save_active_data()
+
+        
