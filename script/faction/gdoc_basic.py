@@ -2,13 +2,18 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from datetime import datetime
 
+
 class GoogleSheetAgent():
     def __init__(self, credentials=None):
-        creds = service_account.Credentials.from_service_account_file(credentials)
-        self.service = build("sheets", "v4", credentials=creds)
-        self.drive = build("drive", "v3", credentials=creds)
+        self.credentials = credentials
 
-    def update(self, sheetID="19935qbJgQONgggFQBm80nBxOAjTGnL7_pEjslfzi7q8", write_array = [[]], sheet_name="CCRC", valueInputOptions="RAW"):
+    def validate(self):
+        self.creds = service_account.Credentials.from_service_account_file(
+            self.credentials)
+        self.service = build("sheets", "v4", credentials=self.creds)
+        self.drive = build("drive", "v3", credentials=self.creds)
+
+    def update(self, sheetID="19935qbJgQONgggFQBm80nBxOAjTGnL7_pEjslfzi7q8", write_array=[[]], sheet_name="CCRC", valueInputOptions="RAW"):
         if not self.check_sheet_existence(sheetID, sheet_name):
             self.create_sheet(sheetID, sheet_name)
 
@@ -31,7 +36,7 @@ class GoogleSheetAgent():
             body=permission,
             fields='id'
         ).execute()
-    
+
     def get_sheet_id(self, ss_id, sheet_name):
         spreadsheet = self.service.spreadsheets().get(spreadsheetId=ss_id).execute()
         sheet_id = None
@@ -56,7 +61,7 @@ class GoogleSheetAgent():
         response = self.service.spreadsheets().create(body=meta_data,
                                                       fields='spreadsheetId').execute()
         new_file_id = response["spreadsheetId"]
-        
+
         request_body = {
             'destination_spreadsheet_id': new_file_id,
         }
@@ -68,15 +73,15 @@ class GoogleSheetAgent():
 
         self.delete_sheet(new_file_id, "Sheet1")
         return new_file_id
-    
+
     def delete_sheet(self, ss_id, sheet_name):
         to_delete_id = self.get_sheet_id(ss_id, sheet_name)
         requests = [
-        {
-            "deleteSheet": {
-                "sheetId": to_delete_id,
+            {
+                "deleteSheet": {
+                    "sheetId": to_delete_id,
+                }
             }
-        }
         ]
         self.service.spreadsheets().batchUpdate(
             spreadsheetId=ss_id,
@@ -84,7 +89,6 @@ class GoogleSheetAgent():
                 "requests": requests
             }
         ).execute()
-
 
     def check_sheet_existence(self, sheetID, sheet_name):
         sheet_exists = False
@@ -113,3 +117,17 @@ class GoogleSheetAgent():
 
         self.service.spreadsheets().batchUpdate(spreadsheetId=sheetId,
                                                 body={'requests': requests}).execute()
+
+    def clear_all_files(self):
+        results = self.drive.files().list(
+            pageSize=1000, fields="nextPageToken, files(id, name)").execute()
+        items = results.get("files", [])
+
+        for item in items:
+            # print(item["id"])
+            try:
+                self.drive.files().delete(fileId=item["id"]).execute()
+            except:
+                print(item["id"], " --- Failed to delete this file")
+
+        print("Delete all files")
