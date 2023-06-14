@@ -188,7 +188,8 @@ class MainWindow(QWidget, QObject):
             # 如果Key拥有者的帮派和输入不一致，则不抓取yata数据
             user_faction_id = spy.get_user_data_json(
                 "", "profile")["faction"]["faction_id"]
-            if user_faction_id == spy.TS_FACTION_DICT.get(faction_name, "") or user_faction_id == faction_name:
+
+            if user_faction_id == spy.TS_FACTION_DICT.get(faction_name, "") or user_faction_id == int(faction_name):
                 yata_json = spy.get_yata_stats_data()
 
             doc_url = spy.save_member_data(faction_name, ts_json, yata_json)
