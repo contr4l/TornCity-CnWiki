@@ -10,7 +10,7 @@ from gdoc_basic import GoogleSheetAgent
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QInputDialog
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt
 
-GDOC_CRED = "./ctr4l_cred.json"
+GDOC_CRED = "ctr4l_cred.json"
 
 class Spy_Catcher(TornLogCatcher):
     TS_FACTION_DICT = {
@@ -68,8 +68,8 @@ class Spy_Catcher(TornLogCatcher):
         # yata stats
         try:
             for tid in yata_json_["members"]:
-                if len(record_users[tid]) > 2:
-                    continue
+                # if len(record_users[tid]) > 2:
+                #     continue
 
                 data = yata_json_["members"][tid]
                 if data["stats_share"] == 0:
@@ -110,7 +110,6 @@ class Spy_Catcher(TornLogCatcher):
         except Exception as e:
             print(repr(e))
             msg = "Publish to Google Sheet failed, you might not have correct credential, please contact contr4l_."
-            print(msg)
             raise ConnectionError(msg)
 
         return "https://docs.google.com/spreadsheets/d/{}".format(new_sheet_id)

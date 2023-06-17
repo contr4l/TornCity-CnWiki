@@ -1,11 +1,13 @@
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from datetime import datetime
-
+import os
 
 class GoogleSheetAgent():
     def __init__(self, credentials=None):
-        self.credentials = credentials
+        self.credentials = os.path.join(os.getcwd(), credentials)
+        print(os.getcwd())
+        print(self.credentials)
 
     def validate(self):
         self.creds = service_account.Credentials.from_service_account_file(

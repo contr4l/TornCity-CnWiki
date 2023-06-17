@@ -38,7 +38,6 @@ export class Exercise_Params {
     this.current_focus = "def";
 
     this.current_gym_progress = 0;
-    this.current_gym_limit = 0;
 
     this.current_stats = [0, 0, 0, 0];
     this.stats_progress = [this.current_stats];
@@ -102,7 +101,6 @@ Exercise_Params.prototype.set_happiness = function (h) {
 Exercise_Params.prototype.should_stop_iter = function () {
   // console.log(`current gym is ${this.current_gym_name}\
   //            \ntarget gym is ${this.stop_gym_name}`);
-  // console.log(`current progress is ${this.current_gym_progress}, target progress is ${this.current_gym_limit}`);
   return (
     this.current_gym_name == this.stop_gym_name &&
     this.current_gym_progress >= this.final_gym_target
@@ -115,7 +113,6 @@ Exercise_Params.prototype.initialize = function () {
   this.current_focus = this.exercise_chain[0];
 
   let gym_idx = cal_func.find_gym_idx(this.current_gym_name);
-  this.current_gym_limit = cal_func.gym_exp[gym_idx];
 };
 
 Exercise_Params.prototype.update = function (gym_idx) {
@@ -145,9 +142,8 @@ Exercise_Params.prototype.strspd_greedy_update = function (
   this.push_attr(this.current_focus);
 };
 
-Exercise_Params.prototype.finish_train = function (gym_idx) {
-  this.current_gym_progress = cal_func.gym_exp[gym_idx];
-  this.current_gym_limit = cal_func.gym_exp[gym_idx];
+Exercise_Params.prototype.finish_train = function (gym_idx, gym_exp) {
+  this.current_gym_progress = gym_exp;
   this.stats_progress.push(this.current_stats.slice());
 };
 
@@ -174,8 +170,8 @@ Exercise_Params.prototype.iter_process = function () {
     this.update_callback(gym_idx);
     
     let gym_exp = this.get_gym_exp(gym_idx);
-
     let train_times = cal_func.get_total_train_times(gym_idx, gym_exp);
+
     let stats_idx = cal_func.stats_idx_map[this.current_focus];
 
     // console.log(`train_times: ${train_times}`);
@@ -194,7 +190,7 @@ Exercise_Params.prototype.iter_process = function () {
     //   `finish ${this.current_gym_name}, stats changed to ${this.stats_info()}`
     // );
     // hit the stop condition
-    this.finish_train(gym_idx);
+    this.finish_train(gym_idx, gym_exp);
     gym_idx += 1;
   }
   console.log("train order is ", this.exercise_chain.slice(start_idx, stop_idx+1));
