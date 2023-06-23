@@ -27,7 +27,7 @@ def get_data_json(selections : str, key : str = global_key) -> json:
         selections, key
     )
 
-    print("send requests {}".format(url))
+    # print("send requests {}".format(url))
     res = requests.get(url)
     if res.status_code != 200:
         print("api request gets negative response!")
@@ -296,7 +296,10 @@ def merge_csv_files(csv_files : list = default_csv_list):
 def write_feishu_data(agent: FeishuAgent, sheet_name: str, data: pd.DataFrame):
     ssid = agent.create_spreadsheet("_".join(sheet_name.split("_")[:-1]))
     sid = agent.create_sheet(sheet_name, ssid)
-    agent.update_sheet(sid, "A", 1, data.values.astype(str).tolist(), ssid)
+    try:
+        agent.update_sheet(sid, "A", 1, data.values.tolist(), ssid)
+    except:
+        agent.update_sheet(sid, "A", 1, data.values.astype(str).tolist(), ssid)
     agent.update_open_access_level(ssToken=ssid)
     return "https://test-coom2yhz71ih.feishu.cn/sheets/" + ssid
 
