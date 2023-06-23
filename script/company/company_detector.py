@@ -294,15 +294,31 @@ def merge_csv_files(csv_files : list = default_csv_list):
     writer.close()
 
 def write_feishu_data(agent: FeishuAgent, sheet_name: str, data: pd.DataFrame):
-    sid = agent.create_sheet(sheet_name)
-    agent.update_sheet(sid, "A", 1, data.values.tolist())
+    ssid = agent.create_spreadsheet("_".join(sheet_name.split("_")[:-1]))
+    sid = agent.create_sheet(sheet_name, ssid)
+    agent.update_sheet(sid, "A", 1, data.values.astype(str).tolist(), ssid)
+    agent.update_open_access_level(ssToken=ssid)
+    return "https://test-coom2yhz71ih.feishu.cn/sheets/" + ssid
+
+def run(key_list):
+    for key in key_list:
+        try:
+            set_key(key)
+            get_all_data()
+            income_data = record_income_table()
+            employee_data = record_employee_table()
+            agent = FeishuAgent()
+            write_feishu_data(agent, income_table_name.split("/")[-1].rstrip(".csv"), income_data)
+            res = write_feishu_data(agent, employee_table_name.split("/")[-1].rstrip(".csv"), employee_data)
+            print("Your Data has been saved in {}".format(res))
+        except Exception as e:
+            print(key, e.__repr__())
+            continue
 
 if __name__ == "__main__":
-    set_key("GkGCcSyK7Fa359MT")
-    get_all_data()
-    income_data = record_income_table()
-    employee_data = record_employee_table()
-    agent = FeishuAgent()
-    write_feishu_data(agent, income_table_name.split("/")[-1].rstrip(".csv"), income_data)
-    write_feishu_data(agent, employee_table_name.split("/")[-1].rstrip(".csv"), employee_data)
-    
+    key_list = ["Rw5peVIuRVIF1pnk", # Chaos,                    super_xu
+                "GUbunrqHUKQ0wyAz", # Private Security Firm     super_xu
+                "GkGCcSyK7Fa359MT", # White Squad,              contr4l_
+                "rAXVCMdUgs8yAbNs", #                           Blade Master
+                ]
+    run(key_list)

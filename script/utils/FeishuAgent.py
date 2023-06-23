@@ -79,6 +79,7 @@ class FeishuAgent:
         if resp.json()["code"] == 0:
             print("{} execute successfully.".format(calling_frame.function))
         else:
+            print(resp.json())
             print("{} execute failed with msg {}.".format(
                 calling_frame.function, resp.json()["msg"]))
         return resp.json()["code"] == 0
@@ -292,7 +293,6 @@ class FeishuAgent:
                 "values": data  # 必须是二维数组
             }
         }
-
         res = requests.put(url, headers=header, json=body)
         return self.handle_response(res)
 
