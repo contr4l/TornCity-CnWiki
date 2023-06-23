@@ -1,7 +1,11 @@
 import requests
 import json
 import pandas as pd
-import os
+import os, sys
+
+sys.path.append("..")
+
+from utils import FeishuAgent
 
 global_key = ""
 
@@ -9,7 +13,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__)) + "/"
 income_table_name = current_dir+"income_table.csv"
 employee_table_name = current_dir+"employee_table.csv"
 
-print("income file is {}\n employee file is {}\n".format(income_table_name, employee_table_name))
+print("income file is {}\nemployee file is {}\n".format(income_table_name, employee_table_name))
 
 default_csv_list = [income_table_name, employee_table_name]
 
@@ -154,11 +158,14 @@ profile = {}
 employees = {}
 def get_all_data():
     global detail, price, profile, employees
-
+    global income_table_name, employee_table_name
     detail = get_detailed_info()
     price = get_price()
     profile = get_profile()
     employees = get_employees()
+
+    income_table_name = current_dir + profile["company"]["name"] + "_income.csv"
+    employee_table_name = current_dir + profile["company"]["name"] + "_employee.csv"
 
 import datetime
 def get_ymd():
@@ -175,8 +182,6 @@ def get_loc(df: pd.DataFrame, ymd):
         print("creating...")
     
     return loc
-
-
 
 def record_income_table():
     print("record income table...")
@@ -234,6 +239,9 @@ def record_income_table():
 
     df.to_csv(income_table_name, index=0, header=header, encoding="utf8")
 
+    return df
+
+
 from math import ceil
 def record_employee_table():
     columns = ["日期","岗位","天数","MAN","INT","END", "属", "估", "登", "名字", "天", "点", "课", "理", "药", "离", "总", "薪", "参"]
@@ -272,8 +280,8 @@ def record_employee_table():
         loc += 1
 
     df.to_csv(employee_table_name, index=0, header=header, encoding="utf8")
-    
 
+    return df
 
 
 def merge_csv_files(csv_files : list = default_csv_list):
@@ -285,9 +293,16 @@ def merge_csv_files(csv_files : list = default_csv_list):
 
     writer.close()
 
+def write_feishu_data(agent: FeishuAgent, sheet_name: str, data: pd.DataFrame):
+    sid = agent.create_sheet(sheet_name)
+    agent.update_sheet(sid, "A", 1, data.values.tolist())
 
 if __name__ == "__main__":
     set_key("GkGCcSyK7Fa359MT")
     get_all_data()
-    record_income_table()
-    record_employee_table()
+    income_data = record_income_table()
+    employee_data = record_employee_table()
+    agent = FeishuAgent()
+    write_feishu_data(agent, income_table_name.split("/")[-1].rstrip(".csv"), income_data)
+    write_feishu_data(agent, employee_table_name.split("/")[-1].rstrip(".csv"), employee_data)
+    
